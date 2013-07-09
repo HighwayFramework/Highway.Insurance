@@ -5,6 +5,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Insurance.UnitTesti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Insurance.CodedUI", "Highway.Insurance.CodedUI\Highway.Insurance.CodedUI.csproj", "{FD412E76-A011-46FA-BF88-38A5EAB112B4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{DAB63CF2-E576-43B9-8D1E-EED8348F9DB2}"
+	ProjectSection(SolutionItems) = preProject
+		Microsoft.VisualStudio.TestTools.UITest.Extension.CrossBrowser.dll = Microsoft.VisualStudio.TestTools.UITest.Extension.CrossBrowser.dll
+		Microsoft.VisualStudio.TestTools.UITest.Extension.Silverlight.dll = Microsoft.VisualStudio.TestTools.UITest.Extension.Silverlight.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CUITe", "CUITe\CUITe\CUITe.csproj", "{947E624B-7124-43F8-A1E5-3ED62277E561}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CUITe.Silverlight", "CUITe\CUITe.Silverlight\CUITe.Silverlight.csproj", "{A8B5BF8A-1EEC-4879-9C71-588A48E6E83D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleTest", "Test\ExampleTest\ExampleTest.csproj", "{6A769D92-1B39-4BA4-AD2C-36949703C46F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExamplePages", "ExamplePages", "{1343E0D1-6DC0-4E72-9905-DA7690B74ADA}"
+	ProjectSection(SolutionItems) = preProject
+		Lists.html = Lists.html
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +36,18 @@ Global
 		{FD412E76-A011-46FA-BF88-38A5EAB112B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD412E76-A011-46FA-BF88-38A5EAB112B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD412E76-A011-46FA-BF88-38A5EAB112B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{947E624B-7124-43F8-A1E5-3ED62277E561}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{947E624B-7124-43F8-A1E5-3ED62277E561}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{947E624B-7124-43F8-A1E5-3ED62277E561}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{947E624B-7124-43F8-A1E5-3ED62277E561}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8B5BF8A-1EEC-4879-9C71-588A48E6E83D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8B5BF8A-1EEC-4879-9C71-588A48E6E83D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8B5BF8A-1EEC-4879-9C71-588A48E6E83D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8B5BF8A-1EEC-4879-9C71-588A48E6E83D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A769D92-1B39-4BA4-AD2C-36949703C46F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A769D92-1B39-4BA4-AD2C-36949703C46F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A769D92-1B39-4BA4-AD2C-36949703C46F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A769D92-1B39-4BA4-AD2C-36949703C46F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

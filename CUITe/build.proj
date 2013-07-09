@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)'==''">Debug</Configuration>
+    <Targets Condition="'$(Targets)'==''">Build</Targets>
+    <BuildInParallel>true</BuildInParallel>
+    <RunTests>true</RunTests>
+  </PropertyGroup>
+  <Import Project="$(MSBuildProjectDirectory)\Third Party\MSBuild Community Tasks 1.4.0.56\MSBuild.Community.Tasks.targets" />
+  <Target Name="Build">
+    
+    <!-- CUITe for .NET v4 (VS2010) -->
+    
+    <MSBuild
+      Projects=".\CUITe.sln"
+      Properties="Configuration=$(Configuration)"
+      Targets="$(Targets)"
+      BuildInParallel="$(BuildInParallel)" />
+
+    <ItemGroup>
+      <FilesToZip Remove="@(FilesToZip)" />
+      <FilesToZip Include=".\CUITe\bin\$(Configuration)\CUITe.dll" />
+      <FilesToZip Include=".\CUITe\bin\$(Configuration)\CUITe.pdb" />
+      <FilesToZip Include=".\CUITe\bin\$(Configuration)\CUITe.xml" />
+      <FilesToZip Include=".\CUITe_ObjectRecorder\bin\$(Configuration)\CUITe_ObjectRecorder.exe" />
+      <FilesToZip Include=".\CUITe_ObjectRecorder\bin\$(Configuration)\CUITe_ObjectRecorder.pdb" />
+    </ItemGroup>
+
+    <MSBuild.Community.Tasks.Zip
+      ZipFileName=".\CUITe for .NET v4 (VS2010).zip"
+      Files="@(FilesToZip)"
+      Flatten="true" />
+
+    <!-- CUITe for .NET v4 (VS2012) -->
+    
+    <MSBuild
+      Projects=".\CUITe (NET4).sln"
+      Properties="Configuration=$(Configuration)"
+      Targets="$(Targets)"
+      BuildInParallel="$(BuildInParallel)" />
+
+    <ItemGroup>
+      <FilesToZip Remove="@(FilesToZip)" />
+      <FilesToZip Include=".\CUITe (NET4)\bin\$(Configuration)\CUITe.dll" />
+      <FilesToZip Include=".\CUITe (NET4)\bin\$(Configuration)\CUITe.pdb" />
+      <FilesToZip Include=".\CUITe (NET4)\bin\$(Configuration)\CUITe.xml" />
+      <FilesToZip Include=".\CUITe_ObjectRecorder (NET4)\bin\$(Configuration)\CUITe_ObjectRecorder.exe" />
+      <FilesToZip Include=".\CUITe_ObjectRecorder (NET4)\bin\$(Configuration)\CUITe_ObjectRecorder.pdb" />
+    </ItemGroup>
+
+    <MSBuild.Community.Tasks.Zip
+      ZipFileName=".\CUITe for .NET v4 (VS2012).zip"
+      Files="@(FilesToZip)"
+      Flatten="true" />
+
+    <!-- CUITe for .NET v4.5 (VS2012) -->
+    
+    <MSBuild
+      Projects=".\CUITe (NET45).sln"
+      Properties="Configuration=$(Configuration)"
+      Targets="$(Targets)"
+      BuildInParallel="$(BuildInParallel)" />
+
+    <ItemGroup>
+      <FilesToZip Remove="@(FilesToZip)" />
+      <FilesToZip Include=".\CUITe (NET45)\bin\$(Configuration)\CUITe.dll" />
+      <FilesToZip Include=".\CUITe (NET45)\bin\$(Configuration)\CUITe.pdb" />
+      <FilesToZip Include=".\CUITe (NET45)\bin\$(Configuration)\CUITe.xml" />
+      <FilesToZip Include=".\CUITe_ObjectRecorder (NET45)\bin\$(Configuration)\CUITe_ObjectRecorder.exe" />
+      <FilesToZip Include=".\CUITe_ObjectRecorder (NET45)\bin\$(Configuration)\CUITe_ObjectRecorder.pdb" />
+    </ItemGroup>
+    
+    <MSBuild.Community.Tasks.Zip
+      ZipFileName=".\CUITe for .NET v4.5 (VS2012).zip"
+      Files="@(FilesToZip)"
+      Flatten="true" />
+
+    <CallTarget Targets="Test" Condition="$(RunTests)"/>
+    
+  </Target>
+
+  <Target Name="Test">
+    <!-- Run Tests -->
+
+    <Exec Command="&quot;$(DevEnvDir)\MSTest.exe&quot; /testcontainer:&quot;Sample_CUITeTestProject\bin\$(Configuration)\Sample_CUITeTestProject.dll&quot;" />
+    <Exec Command="&quot;$(DevEnvDir)\MSTest.exe&quot; /testcontainer:&quot;Sample_CUITeTestProject_WinControls\bin\$(Configuration)\Sample_CUITeTestProject_WinControls.dll&quot;" />
+    <Exec Command="&quot;$(DevEnvDir)\MSTest.exe&quot; /testcontainer:&quot;Sample_CUITeTestProject_WpfControls\bin\$(Configuration)\Sample_CUITeTestProject_WpfControls.dll&quot;" />
+
+    <Exec Command="&quot;$(DevEnvDir)\MSTest.exe&quot; /testcontainer:&quot;Sample_CUITeTestProject (NET4)\bin\$(Configuration)\Sample_CUITeTestProject.dll&quot;" />
+    <Exec Command="&quot;$(DevEnvDir)\MSTest.exe&quot; /testcontainer:&quot;Sample_CUITeTestProject_WinControls (NET4)\bin\$(Configuration)\Sample_CUITeTestProject_WinControls.dll&quot;" />
+    <Exec Command="&quot;$(DevEnvDir)\MSTest.exe&quot; /testcontainer:&quot;Sample_CUITeTestProject_WpfControls (NET4)\bin\$(Configuration)\Sample_CUITeTestProject_WpfControls.dll&quot;" />
+
+    <Exec Command="&quot;$(DevEnvDir)\MSTest.exe&quot; /testcontainer:&quot;Sample_CUITeTestProject (NET45)\bin\$(Configuration)\Sample_CUITeTestProject.dll&quot;" />
+    <Exec Command="&quot;$(DevEnvDir)\MSTest.exe&quot; /testcontainer:&quot;Sample_CUITeTestProject_WinControls (NET45)\bin\$(Configuration)\Sample_CUITeTestProject_WinControls.dll&quot;" />
+    <Exec Command="&quot;$(DevEnvDir)\MSTest.exe&quot; /testcontainer:&quot;Sample_CUITeTestProject_WpfControls (NET45)\bin\$(Configuration)\Sample_CUITeTestProject_WpfControls.dll&quot;" />
+  </Target>
+  
+</Project>

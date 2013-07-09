@@ -38,17 +38,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="UIAutomationClient" />
     <Reference Include="UIAutomationTypes" />
+    <Reference Include="UITestingUtilities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8bd07858427113d3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>ThirdPartyDlls\UITestingUtilities.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -62,7 +67,20 @@
     <Compile Include="CodedUITestBase.cs" />
     <Compile Include="Helpers\Retry.cs" />
     <Compile Include="ICodedUIApplication.cs" />
-    <Compile Include="WinForms\Extensions\WinButtonExtensions.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\BrowserWindows\BroswerConstants.cs" />
+    <Compile Include="Web\BrowserWindows\BroswerWindowClassesConstants.cs" />
+    <Compile Include="Web\BrowserWindows\BrowserIndependentWindow.cs" />
+    <Compile Include="Web\BrowserWindows\DynamicBrowserIndependentWindow.cs" />
+    <Compile Include="Web\Extensions\JQueryExtensions.cs" />
+    <Compile Include="Web\Extensions\MouseExtensions.cs" />
+    <Compile Include="Web\JQueryExtensions.cs" />
+    <Compile Include="MouseExtensions.cs" />
+    <Compile Include="Web\WebScreen.cs" />
     <Compile Include="WinForms\Extensions\WinComboBoxExtensions.cs" />
     <Compile Include="WinForms\Extensions\WinControlExtensions.cs" />
     <Compile Include="WinForms\Extensions\WinEditExtensions.cs" />
@@ -71,7 +89,6 @@
     <Compile Include="WinForms\Extensions\WinTreeExtensions.cs" />
     <Compile Include="WinForms\Extensions\WinWindowExtensions.cs" />
     <Compile Include="WinForms\WinScreen.cs" />
-    <Compile Include="WPF\Extensions\WpfButtonExtensions.cs" />
     <Compile Include="WPF\Extensions\WpfComboBoxExtensions.cs" />
     <Compile Include="WPF\Extensions\WpfControlExtensions.cs" />
     <Compile Include="WPF\Extensions\WpfEditExtensions.cs" />
@@ -83,7 +100,16 @@
     <Compile Include="WPF\WpfScreen.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Web\" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CUITe\CUITe\CUITe.csproj">
+      <Project>{947E624B-7124-43F8-A1E5-3ED62277E561}</Project>
+      <Name>CUITe</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
@@ -105,6 +131,10 @@
   </Choose>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
