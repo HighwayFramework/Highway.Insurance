@@ -18,16 +18,16 @@ namespace Highway.Insurance.UI.Windows.Controls.WinForms
             get { return this.UnWrap().Items; }
         }
 
-        public List<EnhancedWinMenuItem> ItemsAsCUITe
+        public List<EnhancedWinMenuItem> ItemsAsEnhanced
         {
             get
             {
                 List<EnhancedWinMenuItem> list = new List<EnhancedWinMenuItem>();
                 foreach (WinMenuItem item in this.UnWrap().Items)
                 {
-                    EnhancedWinMenuItem cuiteItem = new EnhancedWinMenuItem();
-                    cuiteItem.WrapReady(item);
-                    list.Add(cuiteItem);
+                    EnhancedWinMenuItem Item = new EnhancedWinMenuItem();
+                    Item.WrapReady(item);
+                    list.Add(Item);
                 }
                 return list;
             }

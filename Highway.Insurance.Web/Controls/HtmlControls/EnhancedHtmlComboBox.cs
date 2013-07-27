@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 namespace Highway.Insurance.UI.Web.Controls.HtmlControls
 {
     /// <summary>
-    /// CUITe wrapper for HtmlComboBox.
+    /// Highway.Insurance  wrapper for HtmlComboBox.
     /// </summary>
     public class EnhancedHtmlComboBox : EnhancedHtmlControl<HtmlComboBox>
     {

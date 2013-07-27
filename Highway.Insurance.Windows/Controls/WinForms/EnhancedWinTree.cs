@@ -22,16 +22,16 @@ namespace Highway.Insurance.UI.Windows.Controls.WinForms
             get { return this.UnWrap().Nodes; }
         }
 
-        public List<EnhancedWinTreeItem> NodesAsCUITe
+        public List<EnhancedWinTreeItem> NodesAsEnhanced
         {
             get
             {
                 List<EnhancedWinTreeItem> list = new List<EnhancedWinTreeItem>();
                 foreach (WinTreeItem node in this.UnWrap().Nodes)
                 {
-                    EnhancedWinTreeItem cuiteItem = new EnhancedWinTreeItem();
-                    cuiteItem.WrapReady(node);
-                    list.Add(cuiteItem);
+                    EnhancedWinTreeItem Item = new EnhancedWinTreeItem();
+                    Item.WrapReady(node);
+                    list.Add(Item);
                 }
                 return list;
             }

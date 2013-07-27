@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 namespace Highway.Insurance.UI.Web.Controls.HtmlControls
 {
     /// <summary>
-    /// Base class for all CUITe_Html controls, inherits from CUITe_ControlBase
+    /// Base class for all Highway.Insurance _Html controls, inherits from Highway.Insurance _ControlBase
     /// </summary>
     /// <typeparam name="T">The Coded UI Test Html control type</typeparam>
     public class EnhancedHtmlControl<T> : EnhancedControlBase<T>, IEnhancedHtmlControl
@@ -91,7 +91,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         }
 
         /// <summary>
-        /// Gets the parent of the current CUITe control.
+        /// Gets the parent of the current Highway.Insurance  control.
         /// </summary>
         public override IEnhancedControlBase Parent
         {
@@ -112,7 +112,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         }
 
         /// <summary>
-        /// Gets the previous sibling of the current CUITe control.
+        /// Gets the previous sibling of the current Highway.Insurance  control.
         /// </summary>
         public override IEnhancedControlBase PreviousSibling
         {
@@ -133,7 +133,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         }
 
         /// <summary>
-        /// Gets the next sibling of the current CUITe control.
+        /// Gets the next sibling of the current Highway.Insurance  control.
         /// </summary>
         public override IEnhancedControlBase NextSibling
         {
@@ -162,7 +162,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         }
 
         /// <summary>
-        /// Gets the first child of the current CUITe control.
+        /// Gets the first child of the current Highway.Insurance  control.
         /// </summary>
         public override IEnhancedControlBase FirstChild
         {
@@ -183,7 +183,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         }
         
         /// <summary>
-        /// Returns a list of all first level children of the current CUITe control.
+        /// Returns a list of all first level children of the current Highway.Insurance  control.
         /// </summary>
         /// <returns>list of all first level children</returns>
         public override List<IEnhancedControlBase> GetChildren()

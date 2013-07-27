@@ -88,7 +88,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         /// </summary>
         /// <param name="url">The url.</param>
         /// <param name="title">The title.</param>
-        /// <returns>The CUITe_BrowserWindow that matches the title</returns>
+        /// <returns>The Highway.Insurance _BrowserWindow that matches the title</returns>
         public static new WebPage Launch(string url, string title)
         {
             BrowserWindow.Launch(new Uri(url));
@@ -107,7 +107,21 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         {
             BrowserWindow.Launch(new Uri(url));
             
-            return WebPage.GetBrowserWindow<T>();
+            return WebPage.GetPage<T>();
+        }
+
+        /// <summary>
+        /// Launches the specified url.
+        /// </summary>
+        /// <typeparam name="T">Object repository class</typeparam>
+        /// <param name="url">The url.</param>
+        /// <returns>An instance of the object repository class that matches the title</returns>
+        public static T Launch<T>(string url, string pageTitle)
+            where T : WebPage
+        {
+            BrowserWindow.Launch(new Uri(url));
+
+            return WebPage.GetPage<T>(pageTitle);
         }
 
         /// <summary>
@@ -115,10 +129,21 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         /// </summary>
         /// <typeparam name="T">Object repository class</typeparam>
         /// <returns>instance of T</returns>
-        public static T GetBrowserWindow<T>()
+        public static T GetPage<T>()
         {
             return (T)(object)ObjectRepositoryManager.GetInstance<T>();
         }
+
+        /// <summary>
+        /// Gets the instance of T, which is an Object repository class (page definition).
+        /// </summary>
+        /// <typeparam name="T">Object repository class</typeparam>
+        /// <returns>instance of T</returns>
+        public static T GetPage<T>(string title)
+        {
+            return (T)(object)ObjectRepositoryManager.GetInstance<T>(new object[] { title });
+        }
+
 
         /// <summary>
         /// Sets the window title.
@@ -196,23 +221,23 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         #region Objects initialized at runtime without ObjectRepository entries
 
         /// <summary>
-        /// Gets the CUITe control object when search parameters are passed. 
+        /// Gets the Highway.Insurance  control object when search parameters are passed. 
         /// You don't have to create the object repository entry for this.
         /// </summary>
-        /// <typeparam name="T">Pass the CUITe control you are looking for.</typeparam>
+        /// <typeparam name="T">Pass the Highway.Insurance  control you are looking for.</typeparam>
         /// <param name="searchParameters">In 'Key1=Value1;Key2=Value2' format. For example 'Id=firstname'</param>
-        /// <returns>CUITe_* control object</returns>
+        /// <returns>Highway.Insurance _* control object</returns>
         public T Get<T>(string searchParameters = null)
             where T : IEnhancedControlBase
         {
             T control = EnhancedControlBaseFactory.Create<T>(searchParameters);
 
-            if (typeof(T).Namespace.Equals("CUITe.Controls.SilverlightControls"))
+            if (typeof(T).Namespace.Equals("Highway.Insurance .Controls.SilverlightControls"))
             {
                 var baseControl = Activator.CreateInstance(control.GetBaseType(), new object[] { this.SlObjectContainer });
                 control.Wrap(baseControl);
             }
-            else if (typeof(T).Namespace.Equals("CUITe.Controls.TelerikControls"))
+            else if (typeof(T).Namespace.Equals("Highway.Insurance .Controls.TelerikControls"))
             {
                 var baseControl = Activator.CreateInstance(control.GetBaseType(), new object[] { this.SlObjectContainer });
                 (control as TelerikControls.TelerikComboBox).SetWindow(this);
@@ -226,7 +251,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return control;
         }
 
-        [Obsolete("GetHtmlButton(string) is deprecated, please use Get<CUITe_HtmlButton>(string) instead.")]
+        [Obsolete("GetHtmlButton(string) is deprecated, please use Get<Highway.Insurance _HtmlButton>(string) instead.")]
         public EnhancedHtmlButton GetHtmlButton(string searchParameters)
         {
             EnhancedHtmlButton button = new EnhancedHtmlButton(searchParameters);
@@ -234,7 +259,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return button;
         }
 
-        [Obsolete("GetHtmlCell(string) is deprecated, please use Get<CUITe_HtmlCell>(string) instead.")]
+        [Obsolete("GetHtmlCell(string) is deprecated, please use Get<Highway.Insurance _HtmlCell>(string) instead.")]
         public EnhancedHtmlCell GetHtmlCell(string searchParameters)
         {
             EnhancedHtmlCell cell = new EnhancedHtmlCell(searchParameters);
@@ -242,7 +267,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return cell;
         }
 
-        [Obsolete("GetHtmlCheckBox(string) is deprecated, please use Get<CUITe_HtmlCheckBox>(string) instead.")]
+        [Obsolete("GetHtmlCheckBox(string) is deprecated, please use Get<Highway.Insurance _HtmlCheckBox>(string) instead.")]
         public EnhancedHtmlCheckBox GetHtmlCheckBox(string searchParameters)
         {
             EnhancedHtmlCheckBox chk = new EnhancedHtmlCheckBox(searchParameters);
@@ -250,7 +275,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return chk;
         }
 
-        [Obsolete("GetHtmlComboBox(string) is deprecated, please use Get<CUITe_HtmlComboBox>(string) instead.")]
+        [Obsolete("GetHtmlComboBox(string) is deprecated, please use Get<Highway.Insurance _HtmlComboBox>(string) instead.")]
         public EnhancedHtmlComboBox GetHtmlComboBox(string searchParameters)
         {
             EnhancedHtmlComboBox cmb = new EnhancedHtmlComboBox(searchParameters);
@@ -258,7 +283,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return cmb;
         }
 
-        [Obsolete("GetHtmlDiv(string) is deprecated, please use Get<CUITe_HtmlDiv>(string) instead.")]
+        [Obsolete("GetHtmlDiv(string) is deprecated, please use Get<Highway.Insurance _HtmlDiv>(string) instead.")]
         public EnhancedHtmlDiv GetHtmlDiv(string searchParameters)
         {
             EnhancedHtmlDiv div = new EnhancedHtmlDiv(searchParameters);
@@ -266,7 +291,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return div;
         }
 
-        [Obsolete("GetHtmlEdit(string) is deprecated, please use Get<CUITe_HtmlEdit>(string) instead.")]
+        [Obsolete("GetHtmlEdit(string) is deprecated, please use Get<Highway.Insurance _HtmlEdit>(string) instead.")]
         public EnhancedHtmlEdit GetHtmlEdit(string searchParameters)
         {
             EnhancedHtmlEdit edit = new EnhancedHtmlEdit(searchParameters);
@@ -274,7 +299,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return edit;
         }
 
-        [Obsolete("GetHtmlFileInput(string) is deprecated, please use Get<CUITe_HtmlFileInput>(string) instead.")]
+        [Obsolete("GetHtmlFileInput(string) is deprecated, please use Get<Highway.Insurance _HtmlFileInput>(string) instead.")]
         public EnhancedHtmlFileInput GetHtmlFileInput(string searchParameters)
         {
             EnhancedHtmlFileInput fin = new EnhancedHtmlFileInput(searchParameters);
@@ -282,7 +307,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return fin;
         }
 
-        [Obsolete("GetHtmlHyperlink(string) is deprecated, please use Get<CUITe_HtmlHyperlink>(string) instead.")]
+        [Obsolete("GetHtmlHyperlink(string) is deprecated, please use Get<Highway.Insurance _HtmlHyperlink>(string) instead.")]
         public EnhancedHtmlHyperlink GetHtmlHyperlink(string searchParameters)
         {
             EnhancedHtmlHyperlink href = new EnhancedHtmlHyperlink(searchParameters);
@@ -290,7 +315,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return href;
         }
 
-        [Obsolete("GetHtmlImage(string) is deprecated, please use Get<CUITe_HtmlImage>(string) instead.")]
+        [Obsolete("GetHtmlImage(string) is deprecated, please use Get<Highway.Insurance _HtmlImage>(string) instead.")]
         public EnhancedHtmlImage GetHtmlImage(string searchParameters)
         {
             EnhancedHtmlImage img = new EnhancedHtmlImage(searchParameters);
@@ -298,7 +323,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return img;
         }
 
-        [Obsolete("GetHtmlInputButton(string) is deprecated, please use Get<CUITe_HtmlInputButton>(string) instead.")]
+        [Obsolete("GetHtmlInputButton(string) is deprecated, please use Get<Highway.Insurance _HtmlInputButton>(string) instead.")]
         public EnhancedHtmlInputButton GetHtmlInputButton(string searchParameters)
         {
             EnhancedHtmlInputButton input = new EnhancedHtmlInputButton(searchParameters);
@@ -306,7 +331,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return input;
         }
 
-        [Obsolete("GetHtmlLabel(string) is deprecated, please use Get<CUITe_HtmlLabel>(string) instead.")]
+        [Obsolete("GetHtmlLabel(string) is deprecated, please use Get<Highway.Insurance _HtmlLabel>(string) instead.")]
         public EnhancedHtmlLabel GetHtmlLabel(string searchParameters)
         {
             EnhancedHtmlLabel lbl = new EnhancedHtmlLabel(searchParameters);
@@ -314,7 +339,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return lbl;
         }
 
-        [Obsolete("GetHtmlList(string) is deprecated, please use Get<CUITe_HtmlList>(string) instead.")]
+        [Obsolete("GetHtmlList(string) is deprecated, please use Get<Highway.Insurance _HtmlList>(string) instead.")]
         public EnhancedHtmlList GetHtmlList(string searchParameters)
         {
             EnhancedHtmlList lst = new EnhancedHtmlList(searchParameters);
@@ -322,7 +347,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return lst;
         }
 
-        [Obsolete("GetHtmlPassword(string) is deprecated, please use Get<CUITe_HtmlPassword>(string) instead.")]
+        [Obsolete("GetHtmlPassword(string) is deprecated, please use Get<Highway.Insurance _HtmlPassword>(string) instead.")]
         public EnhancedHtmlPassword GetHtmlPassword(string searchParameters)
         {
             EnhancedHtmlPassword pwd = new EnhancedHtmlPassword(searchParameters);
@@ -332,7 +357,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return pwd;
         }
 
-        [Obsolete("GetHtmlRadioButton(string) is deprecated, please use Get<CUITe_HtmlRadioButton>(string) instead.")]
+        [Obsolete("GetHtmlRadioButton(string) is deprecated, please use Get<Highway.Insurance _HtmlRadioButton>(string) instead.")]
         public EnhancedHtmlRadioButton GetHtmlRadioButton(string searchParameters)
         {
             EnhancedHtmlRadioButton rad = new EnhancedHtmlRadioButton(searchParameters);
@@ -340,7 +365,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return rad;
         }
 
-        [Obsolete("GetHtmlSpan(string) is deprecated, please use Get<CUITe_HtmlSpan>(string) instead.")]
+        [Obsolete("GetHtmlSpan(string) is deprecated, please use Get<Highway.Insurance _HtmlSpan>(string) instead.")]
         public EnhancedHtmlSpan GetHtmlSpan(string searchParameters)
         {
             EnhancedHtmlSpan span = new EnhancedHtmlSpan(searchParameters);
@@ -348,7 +373,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return span;
         }
 
-        [Obsolete("GetHtmlTable(string) is deprecated, please use Get<CUITe_HtmlTable>(string) instead.")]
+        [Obsolete("GetHtmlTable(string) is deprecated, please use Get<Highway.Insurance _HtmlTable>(string) instead.")]
         public EnhancedHtmlTable GetHtmlTable(string searchParameters)
         {
             EnhancedHtmlTable tbl = new EnhancedHtmlTable(searchParameters);
@@ -356,7 +381,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return tbl;
         }
 
-        [Obsolete("GetHtmlTextArea(string) is deprecated, please use Get<CUITe_HtmlTextArea>(string) instead.")]
+        [Obsolete("GetHtmlTextArea(string) is deprecated, please use Get<Highway.Insurance _HtmlTextArea>(string) instead.")]
         public EnhancedHtmlTextArea GetHtmlTextArea(string searchParameters)
         {
             EnhancedHtmlTextArea tarea = new EnhancedHtmlTextArea(searchParameters);

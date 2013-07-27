@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 
 namespace Highway.Insurance.UI.Web.Controls.HtmlControls
 {
-    public enum CUITe_HtmlTableSearchOptions
+    public enum EnhancedHtmlTableSearchOptions
     {
         Normal,
         NormalTight,
@@ -38,11 +38,11 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
 
         public void FindRowAndClick(int iCol, string sValueToSearch)
         {
-            int iRow = FindRow(iCol, sValueToSearch, CUITe_HtmlTableSearchOptions.Normal);
+            int iRow = FindRow(iCol, sValueToSearch, EnhancedHtmlTableSearchOptions.Normal);
             FindCellAndClick(iRow, iCol);
         }
 
-        public void FindRowAndClick(int iCol, string sValueToSearch, CUITe_HtmlTableSearchOptions option)
+        public void FindRowAndClick(int iCol, string sValueToSearch, EnhancedHtmlTableSearchOptions option)
         {
             int iRow = FindRow(iCol, sValueToSearch, option);
             FindCellAndClick(iRow, iCol);
@@ -50,11 +50,11 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
 
         public void FindRowAndDoubleClick(int iCol, string sValueToSearch)
         {
-            int iRow = FindRow(iCol, sValueToSearch, CUITe_HtmlTableSearchOptions.Normal);
+            int iRow = FindRow(iCol, sValueToSearch, EnhancedHtmlTableSearchOptions.Normal);
             FindCellAndDoubleClick(iRow, iCol);
         }
 
-        public void FindRowAndDoubleClick(int iCol, string sValueToSearch, CUITe_HtmlTableSearchOptions option)
+        public void FindRowAndDoubleClick(int iCol, string sValueToSearch, EnhancedHtmlTableSearchOptions option)
         {
             int iRow = FindRow(iCol, sValueToSearch, option);
             FindCellAndDoubleClick(iRow, iCol);
@@ -75,7 +75,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             this.GetCell(iRow, iCol).DoubleClick();
         }
 
-        public int FindRow(int iCol, string sValueToSearch, CUITe_HtmlTableSearchOptions option)
+        public int FindRow(int iCol, string sValueToSearch, EnhancedHtmlTableSearchOptions option)
         {
             this._control.WaitForControlReady();
             int iRow = -1;
@@ -95,23 +95,23 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
                     bool bSearchOptionResult = false;
                     if (colCount == iCol)
                     {
-                        if (option == CUITe_HtmlTableSearchOptions.Normal)
+                        if (option == EnhancedHtmlTableSearchOptions.Normal)
                         {
                             bSearchOptionResult = (sValueToSearch == cell.InnerText);
                         }
-                        else if (option == CUITe_HtmlTableSearchOptions.NormalTight)
+                        else if (option == EnhancedHtmlTableSearchOptions.NormalTight)
                         {
                             bSearchOptionResult = (sValueToSearch == cell.InnerText.Trim());
                         }
-                        else if (option == CUITe_HtmlTableSearchOptions.StartsWith)
+                        else if (option == EnhancedHtmlTableSearchOptions.StartsWith)
                         {
                             bSearchOptionResult = cell.InnerText.StartsWith(sValueToSearch);
                         }
-                        else if (option == CUITe_HtmlTableSearchOptions.EndsWith)
+                        else if (option == EnhancedHtmlTableSearchOptions.EndsWith)
                         {
                             bSearchOptionResult = cell.InnerText.EndsWith(sValueToSearch);
                         }
-                        else if (option == CUITe_HtmlTableSearchOptions.Greedy)
+                        else if (option == EnhancedHtmlTableSearchOptions.Greedy)
                         {
                             bSearchOptionResult = (cell.InnerText.IndexOf(sValueToSearch) > -1);
                         }

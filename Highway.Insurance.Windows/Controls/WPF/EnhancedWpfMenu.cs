@@ -18,16 +18,16 @@ namespace Highway.Insurance.UI.Windows.Controls.WPF
             get { return this.UnWrap().Items; }
         }
 
-        public List<EnhancedWpfMenuItem> ItemsAsCUITe
+        public List<EnhancedWpfMenuItem> ItemsAsEnhanced
         {
             get
             {
                 List<EnhancedWpfMenuItem> list = new List<EnhancedWpfMenuItem>();
                 foreach (WpfMenuItem item in this.UnWrap().Items)
                 {
-                    EnhancedWpfMenuItem cuiteItem = new EnhancedWpfMenuItem();
-                    cuiteItem.WrapReady(item);
-                    list.Add(cuiteItem);
+                    EnhancedWpfMenuItem Item = new EnhancedWpfMenuItem();
+                    Item.WrapReady(item);
+                    list.Add(Item);
                 }
                 return list;
             }

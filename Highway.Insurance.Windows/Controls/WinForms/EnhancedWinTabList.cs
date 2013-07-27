@@ -23,7 +23,7 @@ namespace Highway.Insurance.UI.Windows.Controls.WinForms
             get { return this.UnWrap().Tabs; }
         }
 
-        public List<EnhancedWinTabPage> TabsAsCUITe
+        public List<EnhancedWinTabPage> TabsAsEnhanced
         {
             get
             {

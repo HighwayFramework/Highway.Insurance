@@ -17,7 +17,7 @@ namespace Highway.Insurance.UI.Windows.Controls.WinForms
             get { return this.UnWrap().Cells; }
         }
 
-        public List<EnhancedWinCell> CellsAsCUITe
+        public List<EnhancedWinCell> CellsAsEnhanced
         {
             get
             {
@@ -52,7 +52,7 @@ namespace Highway.Insurance.UI.Windows.Controls.WinForms
             get { return this.UnWrap().Rows; }
         }
 
-        public List<EnhancedWinRow> RowsAsCUITe
+        public List<EnhancedWinRow> RowsAsEnhanced
         {
             get
             {

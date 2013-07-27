@@ -5,32 +5,32 @@ using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
 namespace Highway.Insurance.UI.Windows.Controls.WPF
 {
     /// <summary>
-    /// Factory class for creating CUITe_Wpf* controls. Inherits from CUITe_ControlBaseFactory
+    /// Factory class for creating _Wpf* controls. Inherits from _ControlBaseFactory
     /// </summary>
     public class EnhancedWpfControlFactory : EnhancedControlBaseFactory
     {
         /// <summary>
-        /// Create a CUITe_Wpf* control based on the type of provided WpfControl.
+        /// Create a _Wpf* control based on the type of provided WpfControl.
         /// </summary>
         /// <param name="control"></param>
         /// <returns></returns>
         public static IEnhancedControlBase Create(WpfControl control)
         {
-            string CUITePrefix = ".CUITe_";
+            string Prefix = ".Enhanced";
             string controlTypeName = control.GetType().Name;
-            string CUITeNamespace = typeof(EnhancedWpfControlFactory).Namespace;
+            string Namespace = typeof(EnhancedWpfControlFactory).Namespace;
 
-            // Get CUITe type based on WpfControl type and namespace
-            Type CUITeType = Type.GetType(CUITeNamespace + CUITePrefix + controlTypeName);
+            // Get  type based on WpfControl type and namespace
+            Type Type = Type.GetType(Namespace + Prefix + controlTypeName);
 
             // The type will be null if it does not exist
-            if (CUITeType == null)
+            if (Type == null)
             {
                 throw new Exception(string.Format("Control Type '{0}' not supported", control.GetType().Name));
             }
 
-            // Create CUITe control
-            IEnhancedControlBase enhancedControl = (IEnhancedControlBase)Activator.CreateInstance(CUITeType);
+            // Create  control
+            IEnhancedControlBase enhancedControl = (IEnhancedControlBase)Activator.CreateInstance(Type);
 
             // Wrap WinControl
             enhancedControl.WrapReady(control);

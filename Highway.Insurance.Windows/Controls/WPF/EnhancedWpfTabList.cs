@@ -23,7 +23,7 @@ namespace Highway.Insurance.UI.Windows.Controls.WPF
             get { return this.UnWrap().Tabs; }
         }
 
-        public List<EnhancedWpfTabPage> TabsAsCUITe
+        public List<EnhancedWpfTabPage> TabsAsEnhanced
         {
             get
             {

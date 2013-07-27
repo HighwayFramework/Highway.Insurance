@@ -22,7 +22,7 @@ namespace Highway.Insurance.UI.Windows.Controls.WPF
             get { return this.UnWrap().Cells; }
         }
 
-        public List<EnhancedWpfCell> CellsAsCUITe
+        public List<EnhancedWpfCell> CellsAsEnhanced
         {
             get
             {
@@ -62,7 +62,7 @@ namespace Highway.Insurance.UI.Windows.Controls.WPF
             get { return this.UnWrap().Rows; }
         }
 
-        public List<EnhancedWpfRow> RowsAsCUITe
+        public List<EnhancedWpfRow> RowsAsEnhanced
         {
             get
             {

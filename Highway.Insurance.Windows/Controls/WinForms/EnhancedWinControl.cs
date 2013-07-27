@@ -6,32 +6,32 @@ using Microsoft.VisualStudio.TestTools.UITesting.WinControls;
 namespace Highway.Insurance.UI.Windows.Controls.WinForms
 {
     /// <summary>
-    /// Factory class for creating CUITe_Win* controls. Inherits from CUITe_ControlBaseFactory
+    /// Factory class for creating _Win* controls. Inherits from _ControlBaseFactory
     /// </summary>
     public class EnhancedWinControlFactory : EnhancedControlBaseFactory
     {
         /// <summary>
-        /// Create a CUITe_Win* control based on the type of provided WinControl.
+        /// Create a _Win* control based on the type of provided WinControl.
         /// </summary>
         /// <param name="control"></param>
         /// <returns></returns>
         public static IEnhancedControlBase Create(WinControl control)
         {
-            string CUITePrefix = ".CUITe_";
+            string Prefix = ".Enhanced";
             string controlTypeName = control.GetType().Name;
-            string CUITeNamespace = typeof(EnhancedWinControlFactory).Namespace;
+            string Namespace = typeof(EnhancedWinControlFactory).Namespace;
 
-            // Get CUITe type based on WinControl type and namespace
-            Type CUITeType = Type.GetType(CUITeNamespace + CUITePrefix + controlTypeName);
+            // Get  type based on WinControl type and namespace
+            Type Type = Type.GetType(Namespace + Prefix + controlTypeName);
 
             // The type will be null if it does not exist
-            if (CUITeType == null)
+            if (Type == null)
             {
                 throw new Exception(string.Format("Control Type '{0}' not supported", control.GetType().Name));
             }
 
-            // Create CUITe control
-            IEnhancedControlBase enhancedControl = (IEnhancedControlBase)Activator.CreateInstance(CUITeType);
+            // Create  control
+            IEnhancedControlBase enhancedControl = (IEnhancedControlBase)Activator.CreateInstance(Type);
 
             // Wrap WinControl
             enhancedControl.WrapReady(control);
@@ -41,7 +41,7 @@ namespace Highway.Insurance.UI.Windows.Controls.WinForms
     }
 
     /// <summary>
-    /// Base wrapper class for all CUITe_Win* controls, inherits from CUITe_ControlBase
+    /// Base wrapper class for all _Win* controls, inherits from _ControlBase
     /// </summary>
     /// <typeparam name="T">The Coded UI WinControl type</typeparam>
     public class EnhancedWinControl<T> : EnhancedControlBase<T> where T : WinControl
@@ -50,7 +50,7 @@ namespace Highway.Insurance.UI.Windows.Controls.WinForms
         public EnhancedWinControl(string searchParameters) : base(searchParameters) { }
 
         /// <summary>
-        /// Gets the parent of the current CUITe control.
+        /// Gets the parent of the current  control.
         /// </summary>
         public override IEnhancedControlBase Parent
         {

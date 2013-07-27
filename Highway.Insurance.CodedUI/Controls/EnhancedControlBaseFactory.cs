@@ -3,7 +3,7 @@
 namespace Highway.Insurance.UI.Controls
 {
     /// <summary>
-    /// Factory class for creating CUITe* objects
+    /// Factory class for creating Highway.Insurance * objects
     /// </summary>
     public class EnhancedControlBaseFactory
     {

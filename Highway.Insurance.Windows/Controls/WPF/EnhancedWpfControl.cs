@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
 namespace Highway.Insurance.UI.Windows.Controls.WPF
 {
     /// <summary>
-    /// Base wrapper class for all CUITe_Wpf* controls, inherits from CUITe_ControlBase
+    /// Base wrapper class for all Highway.Insurance _Wpf* controls, inherits from Highway.Insurance _ControlBase
     /// </summary>
     /// <typeparam name="T">The Coded UI WpfControl type</typeparam>
     public class EnhancedWpfControl<T> : EnhancedControlBase<T> where T : WpfControl
@@ -14,7 +14,7 @@ namespace Highway.Insurance.UI.Windows.Controls.WPF
         public EnhancedWpfControl(string searchParameters) : base(searchParameters) { }
 
         /// <summary>
-        /// Gets the parent of the current CUITe control.
+        /// Gets the parent of the current Highway.Insurance  control.
         /// </summary>
         public override IEnhancedControlBase Parent
         {

@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 namespace Highway.Insurance.UI.Controls
 {
     /// <summary>
-    /// Base wrapper class for all CUITe* controls
+    /// Base wrapper class for all Highway.Insurance * controls
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class EnhancedControlBase<T> : IEnhancedControlBase
@@ -112,13 +112,13 @@ namespace Highway.Insurance.UI.Controls
         }
 
         /// <summary>
-        /// Gets the CUITe UI control object from the descendants of this control using the search parameters are passed. 
+        /// Gets the Highway.Insurance  UI control object from the descendants of this control using the search parameters are passed. 
         /// You don't have to create the object repository entry for this.
         /// </summary>
-        /// <typeparam name="T">Pass the CUITe control you are looking for.</typeparam>
+        /// <typeparam name="T">Pass the Highway.Insurance  control you are looking for.</typeparam>
         /// <param name="searchParameters">In 'Key1=Value1;Key2=Value2' format. For example 'Id=firstname' 
         /// or use '~' for Contains such as 'Id~first'</param>
-        /// <returns>CUITe_* control object</returns>
+        /// <returns>Highway.Insurance _* control object</returns>
         public T1 Get<T1>(string searchParameters) where T1 : IEnhancedControlBase
         {
             T1 control = EnhancedControlBaseFactory.Create<T1>(searchParameters);
@@ -131,7 +131,7 @@ namespace Highway.Insurance.UI.Controls
         }
 
         /// <summary>
-        /// Get the Coded UI base type that is being wrapped by CUITe
+        /// Get the Coded UI base type that is being wrapped by Highway.Insurance 
         /// </summary>
         /// <returns></returns>
         public Type GetBaseType()
@@ -140,9 +140,9 @@ namespace Highway.Insurance.UI.Controls
         }
 
         /// <summary>
-        /// Wraps the provided UITestControl in a CUITe object. 
+        /// Wraps the provided UITestControl in a Highway.Insurance  object. 
         /// Fills the Coded UI control's search properties using values 
-        /// set when the CUITe object was created.
+        /// set when the Highway.Insurance  object was created.
         /// </summary>
         /// <param name="control"></param>
         public virtual void Wrap(object control)
@@ -153,18 +153,18 @@ namespace Highway.Insurance.UI.Controls
         }
 
         /// <summary>
-        /// UnWraps the CUITe* controls to expose the underlying UITestControl.
+        /// UnWraps the Highway.Insurance controls to expose the underlying UITestControl.
         /// This helps when you want to use any methods/properties of the underlying UITestControl.
-        /// CUITe* controls are wrappers/abstractions which hides complexity. UnWrap() helps you break the abstraction.
+        /// Highway.Insurance controls are wrappers/abstractions which hides complexity. UnWrap() helps you break the abstraction.
         /// </summary>
-        /// <returns>The underlying UITestControl instance. For example, returns HtmlEdit in case of CUITe_HtmlEdit.</returns>
+        /// <returns>The underlying UITestControl instance. For example, returns HtmlEdit in case of Highway.Insurance.EnhancedHtmlEdit.</returns>
         public T UnWrap()
         {
             return this._control;
         }
 
         /// <summary>
-        /// Wraps the provided UITestControl in a CUITe object.
+        /// Wraps the provided UITestControl in a Highway.Insurance  object.
         /// It does nothing with the control's search properties.
         /// </summary>
         /// <param name="control"></param>
