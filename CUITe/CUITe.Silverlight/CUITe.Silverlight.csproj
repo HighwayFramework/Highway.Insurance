@@ -71,12 +71,6 @@
     <Compile Include="Controls\SilverlightControls\CUITe_SlText.cs" />
     <Compile Include="Controls\SilverlightControls\CUITe_SlTree.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CUITe\CUITe.csproj">
-      <Project>{947e624b-7124-43f8-a1e5-3ed62277e561}</Project>
-      <Name>CUITe</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

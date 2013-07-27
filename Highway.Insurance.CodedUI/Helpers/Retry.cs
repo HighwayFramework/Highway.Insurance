@@ -3,8 +3,8 @@ using System.Threading;
 using Microsoft.VisualStudio.TestTools.UITesting.WinControls;
 using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
 
- // ReSharper disable CheckNamespace
-namespace Microsoft.VisualStudio.TestTools.UITesting
+// ReSharper disable CheckNamespace
+namespace Highway.Insurance.UI.Helpers
 // ReSharper restore CheckNamespace
 {
     public static class Retry

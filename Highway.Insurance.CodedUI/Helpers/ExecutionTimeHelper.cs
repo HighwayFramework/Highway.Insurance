@@ -1,9 +1,9 @@
-﻿// ReSharper disable CheckNamespace
-
-using System;
+﻿using System;
 using Microsoft.VisualStudio.TestTools.UITest.Extension;
+using Microsoft.VisualStudio.TestTools.UITesting;
+// ReSharper disable CheckNamespace
 
-namespace Microsoft.VisualStudio.TestTools.UITesting
+namespace Highway.Insurance.UI.Helpers
 // ReSharper restore CheckNamespace
 {
     public abstract class ExecutionTimeHelper
