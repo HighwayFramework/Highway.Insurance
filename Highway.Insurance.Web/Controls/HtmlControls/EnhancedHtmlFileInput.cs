@@ -1,0 +1,16 @@
+﻿using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
+
+namespace Highway.Insurance.UI.Web.Controls.HtmlControls
+{
+    public class EnhancedHtmlFileInput : EnhancedHtmlControl<HtmlFileInput>
+    {
+        public EnhancedHtmlFileInput() : base() { }
+        public EnhancedHtmlFileInput(string searchParameters) : base(searchParameters) { }
+        public EnhancedHtmlFileInput(HtmlFileInput control) : base(control) { }
+
+        public void SetFile(string sFilePath)
+        {
+            this._control.FileName = sFilePath;
+        }
+    }
+}

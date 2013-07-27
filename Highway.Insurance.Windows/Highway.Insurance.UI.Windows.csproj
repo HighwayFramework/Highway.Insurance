@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{97C51ACC-0C89-44FB-AA3B-A1FBAAD9B9CA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Highway.Insurance.UI.Windows</RootNamespace>
+    <AssemblyName>Highway.Insurance.UI.Windows</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>True</IsCodedUITest>
+    <TestProjectType>CodedUITest</TestProjectType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationBase.cs" />
+    <Compile Include="CodedUITestBase.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfControlFactory.cs" />
+    <Compile Include="ICodedUIApplication.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinButton.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinCalendar.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinCell.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinCheckBox.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinCheckBoxTreeItem.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinClient.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinColumnHeader.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinComboBox.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinControl.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinCustom.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinDateTimePicker.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinEdit.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinGroup.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinHyperlink.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinList.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinListItem.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinMenu.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinMenuBar.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinMenuItem.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinPane.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinProgressBar.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinRadioButton.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinRow.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinRowHeader.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinScrollBar.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinSeparator.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinSlider.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinSpinner.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinSplitButton.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinStatusBar.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinTable.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinTabList.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinTabPage.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinText.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinTitleBar.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinToolBar.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinToolTip.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinTree.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinTreeItem.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinWindow.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfButton.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfCalendar.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfCell.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfCheckBox.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfComboBox.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfControl.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfCustom.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfDatePicker.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfEdit.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfExpander.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfGroup.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfHyperlink.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfImage.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfList.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfListItem.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfMenu.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfMenuItem.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfPane.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfProgressBar.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfRadioButton.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfRow.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfScrollBar.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfSeparator.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfSlider.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfStatusBar.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfTable.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfTabList.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfTabPage.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfText.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfTitleBar.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfToggleButton.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfToolBar.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfToolTip.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfTree.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfTreeItem.cs" />
+    <Compile Include="Controls\WPF\EnhancedWpfWindow.cs" />
+    <Compile Include="WinForms\Extensions\WinComboBoxExtensions.cs" />
+    <Compile Include="WinForms\Extensions\WinControlExtensions.cs" />
+    <Compile Include="WinForms\Extensions\WinEditExtensions.cs" />
+    <Compile Include="WinForms\Extensions\WinListExtensions.cs" />
+    <Compile Include="WinForms\Extensions\WinMenuExtensions.cs" />
+    <Compile Include="WinForms\Extensions\WinTreeExtensions.cs" />
+    <Compile Include="WinForms\Extensions\WinWindowExtensions.cs" />
+    <Compile Include="WinForms\WinScreen.cs" />
+    <Compile Include="WPF\Extensions\WpfComboBoxExtensions.cs" />
+    <Compile Include="WPF\Extensions\WpfControlExtensions.cs" />
+    <Compile Include="WPF\Extensions\WpfEditExtensions.cs" />
+    <Compile Include="WPF\Extensions\WpfListExtensions.cs" />
+    <Compile Include="WPF\Extensions\WpfMenuExtensions.cs" />
+    <Compile Include="WPF\Extensions\WpfTreeExtensions.cs" />
+    <Compile Include="WPF\Extensions\WpfWindowExtensions.cs" />
+    <Compile Include="WPF\WpfScreen.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Highway.Insurance.CodedUI\Highway.Insurance.UI.csproj">
+      <Project>{fd412e76-a011-46fa-bf88-38a5eab112b4}</Project>
+      <Name>Highway.Insurance.UI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
