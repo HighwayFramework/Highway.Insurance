@@ -60,6 +60,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Highway.Insurance.UI\SolutionInfo.cs">
+      <Link>SolutionInfo.cs</Link>
+    </Compile>
     <Compile Include="Browsers\Browser.cs" />
     <Compile Include="Browsers\Chrome.cs" />
     <Compile Include="Browsers\Firefox.cs" />

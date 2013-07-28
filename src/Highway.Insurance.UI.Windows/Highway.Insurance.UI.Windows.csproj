@@ -53,6 +53,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Highway.Insurance.UI\SolutionInfo.cs">
+      <Link>SolutionInfo.cs</Link>
+    </Compile>
     <Compile Include="ApplicationBase.cs" />
     <Compile Include="CodedUITestBase.cs" />
     <Compile Include="Controls\WPF\EnhancedWpfControlFactory.cs" />
