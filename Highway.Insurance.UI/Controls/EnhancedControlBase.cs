@@ -28,10 +28,11 @@ namespace Highway.Insurance.UI.Controls
         public EnhancedControlBase(string searchProperties) 
             : this()
         {
-            // fill the UITestControl's search properties based on the search string provided
+            if (String.IsNullOrWhiteSpace(searchProperties))
+            {
+                return;
+            }
 
-            // iterate through the class inheritance hierarchy to get a list of property names for the specific control
-            // Note: Some properties may not be valid to use for search (ex. filter property names). MS does not provide and exact list
             List<FieldInfo> controlProperties = new List<FieldInfo>();
 
             Type nestedType = typeof(T);
@@ -112,10 +113,10 @@ namespace Highway.Insurance.UI.Controls
         }
 
         /// <summary>
-        /// Gets the Highway.Insurance  UI control object from the descendants of this control using the search parameters are passed. 
+        /// Gets the Highway.Insurance UI control object from the descendants of this control using the search parameters are passed. 
         /// You don't have to create the object repository entry for this.
         /// </summary>
-        /// <typeparam name="T">Pass the Highway.Insurance  control you are looking for.</typeparam>
+        /// <typeparam name="T">Pass the Highway.Insurance control you are looking for.</typeparam>
         /// <param name="searchParameters">In 'Key1=Value1;Key2=Value2' format. For example 'Id=firstname' 
         /// or use '~' for Contains such as 'Id~first'</param>
         /// <returns>Highway.Insurance _* control object</returns>
@@ -140,9 +141,9 @@ namespace Highway.Insurance.UI.Controls
         }
 
         /// <summary>
-        /// Wraps the provided UITestControl in a Highway.Insurance  object. 
+        /// Wraps the provided UITestControl in a Highway.Insurance object. 
         /// Fills the Coded UI control's search properties using values 
-        /// set when the Highway.Insurance  object was created.
+        /// set when the Highway.Insurance object was created.
         /// </summary>
         /// <param name="control"></param>
         public virtual void Wrap(object control)
@@ -164,7 +165,7 @@ namespace Highway.Insurance.UI.Controls
         }
 
         /// <summary>
-        /// Wraps the provided UITestControl in a Highway.Insurance  object.
+        /// Wraps the provided UITestControl in a Highway.Insurance object.
         /// It does nothing with the control's search properties.
         /// </summary>
         /// <param name="control"></param>
@@ -185,17 +186,6 @@ namespace Highway.Insurance.UI.Controls
         /// Wraps WaitForControlReady and Click methods for a UITestControl.
         /// </summary>
         public void Click()
-        {
-            this._control.WaitForControlReady();
-            Mouse.Click(this._control);
-        }
-
-        /// <summary>
-        /// Clicks on the center of the UITestControl based on its point on the screen.
-        /// This may "work-around" Coded UI tests (on third-party controls) that throw the following exception:
-        /// Microsoft.VisualStudio.TestTools.UITest.Extension.FailedToPerformActionOnBlockedControlException: Another control is blocking the control. Please make the blocked control visible and retry the action.
-        /// </summary>
-        public void PointAndClick()
         {
             this._control.WaitForControlReady();
             int x = this._control.BoundingRectangle.X + this._control.BoundingRectangle.Width / 2;

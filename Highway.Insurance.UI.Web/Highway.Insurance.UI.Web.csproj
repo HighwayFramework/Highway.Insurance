@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4C7A235B-98F3-4308-AB15-54120EF5E9DA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Highway.Insurance.UI.Web</RootNamespace>
+    <AssemblyName>Highway.Insurance.UI.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>True</IsCodedUITest>
+    <TestProjectType>CodedUITest</TestProjectType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Interop.SHDocVw">
+      <HintPath>..\CUITe\CUITe\lib\Interop.SHDocVw.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Browsers\Browser.cs" />
+    <Compile Include="Browsers\Chrome.cs" />
+    <Compile Include="Browsers\Firefox.cs" />
+    <Compile Include="Browsers\IBrowser.cs" />
+    <Compile Include="Browsers\InternetExplorer.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlAudio.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlButton.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlCell.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlCheckBox.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlComboBox.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlControl.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlCustom.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlDiv.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlDocument.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlEdit.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlEditableDiv.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlEditableSpan.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlFileInput.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlFrame.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlHeaderCell.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlHeading1.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlHeading2.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlHeading3.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlHeading4.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlHeading5.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlHeading6.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlHyperlink.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlImage.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlInputButton.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlIns.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlLabel.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlList.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlListItem.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlOrderedList.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlParagraph.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlPassword.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlRadioButton.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlRow.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlScrollBar.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlSlider.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlSpan.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlTable.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlTextArea.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlUnorderedList.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlVideo.cs" />
+    <Compile Include="Controls\HtmlControls\EnhancedHtmlXml.cs" />
+    <Compile Include="Controls\HtmlControls\IEnhancedHtmlControl.cs" />
+    <Compile Include="Controls\HtmlControls\WebDialog.cs" />
+    <Compile Include="Controls\HtmlControls\WebPage.cs" />
+    <Compile Include="Controls\TelerikControls\TelerikComboBox.cs" />
+    <Compile Include="MouseExtensions.cs" />
+    <Compile Include="ObjectRepositoryManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Extensions\JQueryExtensions.cs" />
+    <Compile Include="Extensions\MouseExtensions.cs" />
+    <Compile Include="JQueryExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Highway.Insurance.UI\Highway.Insurance.UI.csproj">
+      <Project>{fd412e76-a011-46fa-bf88-38a5eab112b4}</Project>
+      <Name>Highway.Insurance.UI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

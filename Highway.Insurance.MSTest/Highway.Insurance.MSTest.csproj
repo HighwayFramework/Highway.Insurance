@@ -3,18 +3,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6A769D92-1B39-4BA4-AD2C-36949703C46F}</ProjectGuid>
+    <ProjectGuid>{F92F256B-C9AC-45AA-8004-7633861B4CF9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ExampleTest</RootNamespace>
-    <AssemblyName>ExampleTest</AssemblyName>
+    <RootNamespace>Highway.Insurance.MSTest</RootNamespace>
+    <AssemblyName>Highway.Insurance.MSTest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
-    <IsCodedUITest>True</IsCodedUITest>
+    <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -35,12 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="UIAutomationTypes" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -55,20 +51,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Page Repository\HomePage.cs" />
-    <Compile Include="SyntaskExample.cs" />
+    <Compile Include="Policy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ExecutionExtension.cs" />
+    <Compile Include="Row\ExtensionMethodInvoker.cs" />
+    <Compile Include="Row\ClaimAttribute.cs" />
+    <Compile Include="Row\TestResultsHelper.cs" />
+    <Compile Include="UnitTest1.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Highway.Insurance.UI.Web\Highway.Insurance.UI.Web.csproj">
-      <Project>{4C7A235B-98F3-4308-AB15-54120EF5E9DA}</Project>
-      <Name>Highway.Insurance.UI.Web</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Highway.Insurance.UI\Highway.Insurance.UI.csproj">
-      <Project>{FD412E76-A011-46FA-BF88-38A5EAB112B4}</Project>
-      <Name>Highway.Insurance.UI</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

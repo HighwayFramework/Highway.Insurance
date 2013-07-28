@@ -14,7 +14,7 @@ namespace Highway.Insurance.UI.Windows.Controls.WPF
         public EnhancedWpfControl(string searchParameters) : base(searchParameters) { }
 
         /// <summary>
-        /// Gets the parent of the current Highway.Insurance  control.
+        /// Gets the parent of the current Highway.Insurance control.
         /// </summary>
         public override IEnhancedControlBase Parent
         {

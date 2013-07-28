@@ -221,10 +221,10 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         #region Objects initialized at runtime without ObjectRepository entries
 
         /// <summary>
-        /// Gets the Highway.Insurance  control object when search parameters are passed. 
+        /// Gets the Highway.Insurance control object when search parameters are passed. 
         /// You don't have to create the object repository entry for this.
         /// </summary>
-        /// <typeparam name="T">Pass the Highway.Insurance  control you are looking for.</typeparam>
+        /// <typeparam name="T">Pass the Highway.Insurance control you are looking for.</typeparam>
         /// <param name="searchParameters">In 'Key1=Value1;Key2=Value2' format. For example 'Id=firstname'</param>
         /// <returns>Highway.Insurance _* control object</returns>
         public T Get<T>(string searchParameters = null)
