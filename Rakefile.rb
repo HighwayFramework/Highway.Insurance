@@ -5,7 +5,7 @@ require 'fileutils'
 
 CONFIG        = 'Debug'
 RAKE_DIR      = File.expand_path(File.dirname(__FILE__))
-SOLUTION_DIR  = RAKE_DIR
+SOLUTION_DIR  = RAKE_DIR + "/Highway/"
 TEST_DIR      = SOLUTION_DIR + "/test/"
 SRC_DIR       = SOLUTION_DIR + "/src/"
 SOLUTION_FILE = 'Highway.Insurance.sln'
@@ -42,9 +42,9 @@ end
 namespace :package do
 	
 	def create_packs()
-		sh '.nuget/nuget.exe pack src/Highway.Insurance.UI/Highway.Insurance.UI.csproj -o pack'
-		sh '.nuget/nuget.exe pack src/Highway.Insurance.UI.Web/Highway.Insurance.UI.Web.csproj -o pack'
-		sh '.nuget/nuget.exe pack src/Highway.Insurance.UI.Windows/Highway.Insurance.UI.Windows.csproj -o pack'
+		sh '.nuget/nuget.exe pack Highway/src/Highway.Insurance.UI/Highway.Insurance.UI.csproj -o pack'
+		sh '.nuget/nuget.exe pack Highway/src/Highway.Insurance.UI.Web/Highway.Insurance.UI.Web.csproj -o pack'
+		sh '.nuget/nuget.exe pack Highway/src/Highway.Insurance.UI.Windows/Highway.Insurance.UI.Windows.csproj -o pack'
 	end
 		
 	task :packall => [ :clean ] do
