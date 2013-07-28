@@ -7,20 +7,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{DAB63CF2-E57
 		Microsoft.VisualStudio.TestTools.UITest.Extension.Silverlight.dll = Microsoft.VisualStudio.TestTools.UITest.Extension.Silverlight.dll
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleTest", "Test\ExampleTest\ExampleTest.csproj", "{6A769D92-1B39-4BA4-AD2C-36949703C46F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExamplePages", "ExamplePages", "{1343E0D1-6DC0-4E72-9905-DA7690B74ADA}"
 	ProjectSection(SolutionItems) = preProject
 		Lists.html = Lists.html
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Insurance.UI", "Highway.Insurance.UI\Highway.Insurance.UI.csproj", "{FD412E76-A011-46FA-BF88-38A5EAB112B4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Insurance.UI", "src\Highway.Insurance.UI\Highway.Insurance.UI.csproj", "{FD412E76-A011-46FA-BF88-38A5EAB112B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Insurance.UI.Web", "Highway.Insurance.UI.Web\Highway.Insurance.UI.Web.csproj", "{4C7A235B-98F3-4308-AB15-54120EF5E9DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Insurance.UI.Web", "src\Highway.Insurance.UI.Web\Highway.Insurance.UI.Web.csproj", "{4C7A235B-98F3-4308-AB15-54120EF5E9DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Insurance.UI.Windows", "Highway.Insurance.UI.Windows\Highway.Insurance.UI.Windows.csproj", "{97C51ACC-0C89-44FB-AA3B-A1FBAAD9B9CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Insurance.UI.Windows", "src\Highway.Insurance.UI.Windows\Highway.Insurance.UI.Windows.csproj", "{97C51ACC-0C89-44FB-AA3B-A1FBAAD9B9CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.UI.Web", "Example.UI.Web\Example.UI.Web.csproj", "{8D375FEE-A322-4FAB-BBD4-FE369F861F03}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.UI.Web", "test\Example.UI.Web\Example.UI.Web.csproj", "{8D375FEE-A322-4FAB-BBD4-FE369F861F03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.UI.Web.Tests", "test\Example.UI.Web.Tests\Example.UI.Web.Tests.csproj", "{245897D4-96EC-430F-BF1A-9CA44FD06ECB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,10 +28,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6A769D92-1B39-4BA4-AD2C-36949703C46F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6A769D92-1B39-4BA4-AD2C-36949703C46F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6A769D92-1B39-4BA4-AD2C-36949703C46F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6A769D92-1B39-4BA4-AD2C-36949703C46F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FD412E76-A011-46FA-BF88-38A5EAB112B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FD412E76-A011-46FA-BF88-38A5EAB112B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD412E76-A011-46FA-BF88-38A5EAB112B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -48,6 +44,10 @@ Global
 		{8D375FEE-A322-4FAB-BBD4-FE369F861F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D375FEE-A322-4FAB-BBD4-FE369F861F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D375FEE-A322-4FAB-BBD4-FE369F861F03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{245897D4-96EC-430F-BF1A-9CA44FD06ECB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{245897D4-96EC-430F-BF1A-9CA44FD06ECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{245897D4-96EC-430F-BF1A-9CA44FD06ECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{245897D4-96EC-430F-BF1A-9CA44FD06ECB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
