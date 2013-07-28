@@ -6,6 +6,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
     {
         public EnhancedHtmlAudio() : base() { }
         public EnhancedHtmlAudio(string sSearchProperties) : base(sSearchProperties) { }
+        public EnhancedHtmlAudio(WebPage page, string selector) : base(page, selector) { }
         public EnhancedHtmlAudio(HtmlAudio control) : base(control) { }
     }
 }

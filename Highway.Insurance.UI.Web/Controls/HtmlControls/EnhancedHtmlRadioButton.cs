@@ -8,6 +8,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
     {
         public EnhancedHtmlRadioButton() : base() { }
         public EnhancedHtmlRadioButton(string searchParameters) : base(searchParameters) { }
+        public EnhancedHtmlRadioButton(WebPage page, string selector) : base(page, selector) { }
 
         public void Select()
         {

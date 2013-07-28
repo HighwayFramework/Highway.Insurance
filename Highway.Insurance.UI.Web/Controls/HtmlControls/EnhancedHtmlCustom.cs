@@ -16,6 +16,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         {
             Initialize(tagName);
         }
+        public EnhancedHtmlCustom(WebPage page, string selector) : base(page, selector) { }
 
         public EnhancedHtmlCustom(HtmlCustom control) : base(control) { }
 

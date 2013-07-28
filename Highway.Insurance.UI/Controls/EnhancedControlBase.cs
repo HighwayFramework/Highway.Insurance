@@ -19,43 +19,30 @@ namespace Highway.Insurance.UI.Controls
     {
         protected T _control;
         protected PropertyExpressionCollection SearchProperties;
+        private string _jquerySelector; 
+        private bool _isJquery;
 
         public EnhancedControlBase()
         {
             this.SearchProperties = new PropertyExpressionCollection();
         }
 
-        public EnhancedControlBase(string searchProperties) 
-            : this()
+        public EnhancedControlBase(string searchProperties)
         {
             if (String.IsNullOrWhiteSpace(searchProperties))
             {
                 return;
             }
+            SetupInstanceForCodedUISelector(searchProperties);
+        }
 
-            List<FieldInfo> controlProperties = new List<FieldInfo>();
 
-            Type nestedType = typeof(T);
-            Type nestedPropertyNamesType = nestedType.GetNestedType("PropertyNames");
-
-            while (nestedType != typeof(object))
-            {
-                if (nestedPropertyNamesType != null)
-                {
-                    controlProperties.AddRange(nestedPropertyNamesType.GetFields());
-                }
-
-                nestedType = nestedType.BaseType;
-                nestedPropertyNamesType = nestedType.GetNestedType("PropertyNames");
-            }
-
-            if (searchProperties == null)
-            {
-                return;
-            }
+        private void SetupInstanceForCodedUISelector(string searchProperties)
+        {
+            var controlProperties = GetAllPropertyNames();
 
             // Split on groups of key/value pairs
-            string[] saKeyValuePairs = searchProperties.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] saKeyValuePairs = searchProperties.Split(new char[] {';'}, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string sKeyValue in saKeyValuePairs)
             {
@@ -63,12 +50,12 @@ namespace Highway.Insurance.UI.Controls
 
                 // If split on '=' does not work, then try '~'
                 // Split at the first instance of '='. Other instances are considered part of the value.
-                string[] saKeyVal = sKeyValue.Split(new char[] { '=' }, 2);
+                string[] saKeyVal = sKeyValue.Split(new char[] {'='}, 2);
                 if (saKeyVal.Length != 2)
                 {
                     // Otherwise try to split on '~'. If it works then compare type is Contains
                     // Split at the first instance of '~'. Other instances are considered part of the value.
-                    saKeyVal = sKeyValue.Split(new char[] { '~' }, 2);
+                    saKeyVal = sKeyValue.Split(new char[] {'~'}, 2);
                     if (saKeyVal.Length == 2)
                     {
                         compareOperator = PropertyExpressionOperator.Contains;
@@ -82,7 +69,8 @@ namespace Highway.Insurance.UI.Controls
                 // Find the first property in the list of known values
                 string valueName = saKeyVal[0];
 
-                if ((typeof(T).IsSubclassOf(typeof(HtmlControl))) && (valueName.Equals("Value", StringComparison.OrdinalIgnoreCase)))
+                if ((typeof (T).IsSubclassOf(typeof (HtmlControl))) &&
+                    (valueName.Equals("Value", StringComparison.OrdinalIgnoreCase)))
                 {
                     //support for backward compatibility where search properties like "Value=Log In" are used
                     valueName += "Attribute";
@@ -93,12 +81,33 @@ namespace Highway.Insurance.UI.Controls
 
                 if (foundField == null)
                 {
-                    throw new HighwayInsuranceInvalidSearchKey(valueName, searchProperties, controlProperties.Select(x => x.Name).ToList());
+                    throw new HighwayInsuranceInvalidSearchKey(valueName, searchProperties,
+                                                               controlProperties.Select(x => x.Name).ToList());
                 }
 
                 // Add the search property, value and type
                 this.SearchProperties.Add(foundField.GetValue(null).ToString(), saKeyVal[1], compareOperator);
             }
+        }
+
+        private static List<FieldInfo> GetAllPropertyNames()
+        {
+            List<FieldInfo> controlProperties = new List<FieldInfo>();
+
+            Type nestedType = typeof (T);
+            Type nestedPropertyNamesType = nestedType.GetNestedType("PropertyNames");
+
+            while (nestedType != typeof (object))
+            {
+                if (nestedPropertyNamesType != null)
+                {
+                    controlProperties.AddRange(nestedPropertyNamesType.GetFields());
+                }
+
+                nestedType = nestedType.BaseType;
+                nestedPropertyNamesType = nestedType.GetNestedType("PropertyNames");
+            }
+            return controlProperties;
         }
 
         public T1 Get<T1>() where T1 : IEnhancedControlBase
@@ -274,5 +283,11 @@ namespace Highway.Insurance.UI.Controls
         public virtual List<IEnhancedControlBase> GetChildren() { return null; }
 
         #endregion
+    }
+
+    public enum SelectorType
+    {
+        Default = 0,
+        JQuery
     }
 }

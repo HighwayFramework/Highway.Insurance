@@ -4,6 +4,7 @@
     {
         private const string _tagName = "h4";
 
+        public EnhancedHtmlHeading4(WebPage page, string selector) : base(page, selector) { }
         public EnhancedHtmlHeading4(string searchParameters = null)
             : base(_tagName, searchParameters)
         {

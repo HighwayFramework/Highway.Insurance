@@ -18,7 +18,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
     {
         public EnhancedHtmlTable() : base() { }
         public EnhancedHtmlTable(string searchParameters) : base(searchParameters) { }
-
+        public EnhancedHtmlTable(WebPage page, string selector) : base(page, selector) { }
         public int ColumnCount
         {
             get

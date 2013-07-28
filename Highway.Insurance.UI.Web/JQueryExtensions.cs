@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UITesting;
 
 namespace Highway.Insurance.UI.Web
@@ -14,6 +15,12 @@ namespace Highway.Insurance.UI.Web
         public static T FindControlBySelector<T>(this BrowserWindow window, string selector)
         {
             var controlBySelector = (T) window.ExecuteScript(string.Format("return $('{0}')[0]", selector));
+            return controlBySelector;
+        }
+
+        public static object FindControlBySelector(this BrowserWindow window,Type htmlType, string selector)
+        {
+            var controlBySelector = Convert.ChangeType(window.ExecuteScript(string.Format("return $('{0}')[0]", selector)),htmlType);
             return controlBySelector;
         }
 

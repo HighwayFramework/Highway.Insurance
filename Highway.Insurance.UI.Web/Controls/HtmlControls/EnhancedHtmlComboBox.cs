@@ -11,6 +11,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
     {
         public EnhancedHtmlComboBox() : base() { }
         public EnhancedHtmlComboBox(string searchParameters) : base(searchParameters) { }
+        public EnhancedHtmlComboBox(WebPage page, string selector) : base(page, selector) { }
         public EnhancedHtmlComboBox(HtmlComboBox control) : base(control) { }
 
         /// <summary>

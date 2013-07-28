@@ -6,6 +6,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
     {
         public EnhancedHtmlHyperlink() : base() { }
         public EnhancedHtmlHyperlink(string searchParameters) : base(searchParameters) { }
+        public EnhancedHtmlHyperlink(WebPage page, string selector) : base(page, selector) { }
         public EnhancedHtmlHyperlink(HtmlHyperlink control) : base(control) { }
     }
 }

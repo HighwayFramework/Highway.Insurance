@@ -6,6 +6,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
     {
         public EnhancedHtmlEditableSpan() : base() { }
         public EnhancedHtmlEditableSpan(string searchParameters) : base(searchParameters) { }
+        public EnhancedHtmlEditableSpan(WebPage page, string selector) : base(page, selector) { }
         public EnhancedHtmlEditableSpan(HtmlEditableSpan control) : base(control) { }
 
         public void SetText(string sText)

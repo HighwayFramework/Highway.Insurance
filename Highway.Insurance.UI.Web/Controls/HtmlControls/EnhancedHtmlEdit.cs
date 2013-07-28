@@ -6,6 +6,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
     {
         public EnhancedHtmlEdit() : base() { }
         public EnhancedHtmlEdit(string searchParameters) : base(searchParameters) { }
+        public EnhancedHtmlEdit(WebPage page, string selector) : base(page, selector) { }
         public EnhancedHtmlEdit(HtmlEdit control) : base(control) { }
 
         public void SetText(string sText)

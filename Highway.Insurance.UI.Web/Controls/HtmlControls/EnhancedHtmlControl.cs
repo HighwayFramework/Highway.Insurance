@@ -14,6 +14,9 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
     public class EnhancedHtmlControl<T> : EnhancedControlBase<T>, IEnhancedHtmlControl
         where T : HtmlControl
     {
+        private WebPage _page;
+        private string _selector;
+
         public EnhancedHtmlControl()
             : base()
         {
@@ -24,11 +27,30 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         {
         }
 
-        public EnhancedHtmlControl(HtmlControl control)
-            : base()
+        public EnhancedHtmlControl(WebPage page, string selector) : base()
         {
-            this._control = (T)control;
+            _page = page;
+            _selector = selector;
+            _control = page.FindControlBySelector<T>(selector);
         }
+
+        public EnhancedHtmlControl(HtmlControl control)
+        {
+            _control = (T)control;
+        }
+
+        public T1 Get<T1>(string searchParameters) where T1 : IEnhancedControlBase
+        {
+            if (string.IsNullOrWhiteSpace(_selector))
+            {
+                return base.Get<T1>(searchParameters);
+            }
+            T1 control = EnhancedControlBaseFactory.Create<T1>();
+            var baseControl = _page.FindControlBySelector(typeof(T1), string.Format("{0} {1}", _selector, searchParameters));
+            control.Wrap(baseControl);
+            return control;
+        }
+
 
         /// <summary>
         /// Gets the text content of this control.
@@ -348,5 +370,12 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             }
             return i;
         }
+
+    }
+
+    public enum SelectorType
+    {
+        Default = 0,
+        JQuery
     }
 }

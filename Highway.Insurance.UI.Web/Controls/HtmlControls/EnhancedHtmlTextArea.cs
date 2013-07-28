@@ -6,7 +6,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
     {
         public EnhancedHtmlTextArea() : base() { }
         public EnhancedHtmlTextArea(string searchParameters) : base(searchParameters) { }
-
+        public EnhancedHtmlTextArea(WebPage page, string selector) : base(page, selector) { }
         public void SetText(string sText)
         {
             this._control.WaitForControlReady();

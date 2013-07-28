@@ -8,5 +8,6 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
 
         public EnhancedHtmlListItem(string searchParameters = null) : base(searchParameters) { }
         public EnhancedHtmlListItem(HtmlListItem control) : base(control) { }
+        public EnhancedHtmlListItem(WebPage page, string selector) : base(page, selector) { }
     }
 }

@@ -6,6 +6,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
     {
         public EnhancedHtmlFileInput() : base() { }
         public EnhancedHtmlFileInput(string searchParameters) : base(searchParameters) { }
+        public EnhancedHtmlFileInput(WebPage page, string selector) : base(page, selector) { }
         public EnhancedHtmlFileInput(HtmlFileInput control) : base(control) { }
 
         public void SetFile(string sFilePath)

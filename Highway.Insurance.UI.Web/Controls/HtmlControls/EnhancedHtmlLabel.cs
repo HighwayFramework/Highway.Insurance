@@ -6,6 +6,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
     {
         public EnhancedHtmlLabel() : base() { }
         public EnhancedHtmlLabel(string searchParameters) : base(searchParameters) { }
+        public EnhancedHtmlLabel(WebPage page, string selector) : base(page, selector) { }
         public EnhancedHtmlLabel(HtmlLabel control) : base(control) { }
 
         /// <summary>

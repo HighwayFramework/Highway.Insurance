@@ -8,6 +8,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
     {
         public EnhancedHtmlCheckBox() : base() { }        
         public EnhancedHtmlCheckBox(string searchParameters) : base(searchParameters) { }
+        public EnhancedHtmlCheckBox(WebPage page, string selector) : base(page, selector) { }
         public EnhancedHtmlCheckBox(HtmlCheckBox control) : base(control) { }
 
         public void Check()

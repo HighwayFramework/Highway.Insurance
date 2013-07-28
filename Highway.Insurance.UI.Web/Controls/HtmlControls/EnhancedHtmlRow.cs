@@ -6,6 +6,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
     {
         public EnhancedHtmlRow() : base() { }
         public EnhancedHtmlRow(string searchParameters) : base(searchParameters) { }
+        public EnhancedHtmlRow(WebPage page, string selector) : base(page, selector) { }
         public EnhancedHtmlRow(HtmlControl control) : base(control) { }
     }
 }
