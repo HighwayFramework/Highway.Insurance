@@ -99,6 +99,7 @@
     <Compile Include="TempFile.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="TestHtml\Lists.html" />
     <Content Include="TestXml\XMLFile1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

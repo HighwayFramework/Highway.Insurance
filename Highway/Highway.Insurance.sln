@@ -7,11 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{DAB63CF2-E57
 		Microsoft.VisualStudio.TestTools.UITest.Extension.Silverlight.dll = Microsoft.VisualStudio.TestTools.UITest.Extension.Silverlight.dll
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExamplePages", "ExamplePages", "{1343E0D1-6DC0-4E72-9905-DA7690B74ADA}"
-	ProjectSection(SolutionItems) = preProject
-		Lists.html = Lists.html
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Insurance.UI", "src\Highway.Insurance.UI\Highway.Insurance.UI.csproj", "{FD412E76-A011-46FA-BF88-38A5EAB112B4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Insurance.UI.Web", "src\Highway.Insurance.UI.Web\Highway.Insurance.UI.Web.csproj", "{4C7A235B-98F3-4308-AB15-54120EF5E9DA}"

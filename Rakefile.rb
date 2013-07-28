@@ -5,7 +5,7 @@ require 'fileutils'
 
 CONFIG        = 'Debug'
 RAKE_DIR      = File.expand_path(File.dirname(__FILE__))
-SOLUTION_DIR  = RAKE_DIR + "/Highway/"
+SOLUTION_DIR  = RAKE_DIR + "/Highway"
 TEST_DIR      = SOLUTION_DIR + "/test/"
 SRC_DIR       = SOLUTION_DIR + "/src/"
 SOLUTION_FILE = 'Highway.Insurance.sln'
@@ -13,8 +13,8 @@ MSTEST        = ENV['VS110COMNTOOLS'] + "..\\IDE\\mstest.exe"
 NUGET         = SOLUTION_DIR + "/.nuget/nuget.exe"
 
 # --- Retrieve a list of all Test DLLS -------------------------------------------------------
-Dir.chdir('test')
-TEST_DLLS     = Dir.glob('*Tests').collect{|dll| File.join(dll, 'bin', CONFIG, dll + '.dll')}.map{|dll| 'test/' + dll }
+Dir.chdir('Highway/test')
+TEST_DLLS     = Dir.glob('*Tests').collect{|dll| File.join(dll, 'bin', CONFIG, dll + '.dll')}.map{|dll| 'Highway/test/' + dll }
 Dir.chdir('../..')
 # --------------------------------------------------------------------------------------------
 
@@ -42,9 +42,9 @@ end
 namespace :package do
 	
 	def create_packs()
-		sh '.nuget/nuget.exe pack Highway/src/Highway.Insurance.UI/Highway.Insurance.UI.csproj -o pack'
-		sh '.nuget/nuget.exe pack Highway/src/Highway.Insurance.UI.Web/Highway.Insurance.UI.Web.csproj -o pack'
-		sh '.nuget/nuget.exe pack Highway/src/Highway.Insurance.UI.Windows/Highway.Insurance.UI.Windows.csproj -o pack'
+		sh 'Highway/.nuget/nuget.exe pack Highway/src/Highway.Insurance.UI/Highway.Insurance.UI.csproj -o pack'
+		sh 'Highway/.nuget/nuget.exe pack Highway/src/Highway.Insurance.UI.Web/Highway.Insurance.UI.Web.csproj -o pack'
+		sh 'Highway/.nuget/nuget.exe pack Highway/src/Highway.Insurance.UI.Windows/Highway.Insurance.UI.Windows.csproj -o pack'
 	end
 		
 	task :packall => [ :clean ] do
@@ -59,7 +59,7 @@ namespace :package do
 		create_packs	
 		Dir.chdir('pack')
 		Dir.glob('*').each do |file| 
-			sh '../.nuget/nuget.exe push ' + file
+			sh '../Highway/.nuget/nuget.exe push ' + file
 			FileUtils.move(file,'../nuget/')
 		end
 		Dir.chdir('..')
