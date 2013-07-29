@@ -46,10 +46,8 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             {
                 return base.Get<T1>(searchParameters);
             }
-            var control = EnhancedHtmlControlBaseFactory.Create<T1>();
             string selector = string.Format("{0} {1}", Selector, searchParameters);
-            control.Selector = selector;
-            control.Page = Page;
+            var control = EnhancedHtmlControlBaseFactory.Create<T1>(Page,selector);
             var baseControl = Page.FindControlBySelector(control.GetBaseType(), selector);
             control.Wrap(baseControl,false);
             return control;
@@ -57,14 +55,12 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
 
         public IEnumerable<T1> Find<T1>(string searchParameters) where T1 : IEnhancedHtmlControl
         {
-            T1 control = EnhancedHtmlControlBaseFactory.Create<T1>();
             string selector = string.Format("{0} {1}", Selector, searchParameters);
+            T1 control = EnhancedHtmlControlBaseFactory.Create<T1>(Page, selector);
             var baseControls = Page.FindControlsBySelector(control.GetBaseType(), selector);
             return baseControls.Select(x =>
             {
-                var c = EnhancedHtmlControlBaseFactory.Create<T1>();
-                control.Selector = selector;
-                control.Page = Page;
+                var c = EnhancedHtmlControlBaseFactory.Create<T1>(Page, selector);
                 c.Wrap(x, false);
                 return c;
             });

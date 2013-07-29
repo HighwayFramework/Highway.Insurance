@@ -14,7 +14,7 @@
     <copyright>Devlin Liles Copyright 2012</copyright>
     <tags>Architecture  CodedUI Testing UI Automation QA Productivity</tags>
     <dependencies>
-      <dependency id="Highway.Insurance.UI" version="1.0.0.7" />
+      <dependency id="Highway.Insurance.UI" version="1.0.0.9" />
     </dependencies>
 
   </metadata>
