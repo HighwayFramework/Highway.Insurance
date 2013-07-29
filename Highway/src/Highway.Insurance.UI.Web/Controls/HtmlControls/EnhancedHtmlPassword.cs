@@ -7,9 +7,9 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         public EnhancedHtmlPassword() : base() { }
         public EnhancedHtmlPassword(string searchParameters) : base(searchParameters) { }
         public EnhancedHtmlPassword(WebPage page, string selector) : base(page, selector) { }
-        public override void Wrap(object control)
+        public override void Wrap(object control, bool setSearchProperties = true)
         {
-            base.Wrap(control);
+            base.Wrap(control, setSearchProperties);
             this._control = control as HtmlEdit;
             this._control.FilterProperties[HtmlEdit.PropertyNames.Type] = "PASSWORD";
         }

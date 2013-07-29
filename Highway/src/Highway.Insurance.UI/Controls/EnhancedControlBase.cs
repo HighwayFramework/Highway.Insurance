@@ -155,11 +155,14 @@ namespace Highway.Insurance.UI.Controls
         /// set when the Highway.Insurance object was created.
         /// </summary>
         /// <param name="control"></param>
-        public virtual void Wrap(object control)
+        public virtual void Wrap(object control, bool setSearchProperties = true)
         {
             this._control = control as T;
-            this._control.SearchProperties.AddRange(this.SearchProperties);
-            this._control.SearchConfigurations.Add(SearchConfiguration.AlwaysSearch);
+            if (setSearchProperties)
+            {
+                this._control.SearchProperties.AddRange(this.SearchProperties);
+                this._control.SearchConfigurations.Add(SearchConfiguration.AlwaysSearch);
+            }
         }
 
         /// <summary>
@@ -200,6 +203,13 @@ namespace Highway.Insurance.UI.Controls
             int x = this._control.BoundingRectangle.X + this._control.BoundingRectangle.Width / 2;
             int y = this._control.BoundingRectangle.Y + this._control.BoundingRectangle.Height / 2;
             Mouse.Click(new Point(x, y));
+        }
+
+        public void Hover()
+        {
+            this._control.WaitForControlReady();
+            Mouse.Hover(this._control);
+
         }
 
         /// <summary>

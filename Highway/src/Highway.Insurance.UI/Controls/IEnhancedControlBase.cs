@@ -7,7 +7,7 @@ namespace Highway.Insurance.UI.Controls
     {
         Type GetBaseType();
 
-        void Wrap(object control);
+        void Wrap(object control, bool setSearchProperties = true);
 
         void WrapReady(object control);
 
@@ -20,7 +20,7 @@ namespace Highway.Insurance.UI.Controls
         bool Enabled
         {
             get;
-        }
+        }   
 
         bool Exists
         {
@@ -42,5 +42,6 @@ namespace Highway.Insurance.UI.Controls
         IEnhancedControlBase FirstChild { get; }
 
         List<IEnhancedControlBase> GetChildren();
+        void Hover();
     }
 }

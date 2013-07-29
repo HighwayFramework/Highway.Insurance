@@ -48,7 +48,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             }
             T1 control = EnhancedControlBaseFactory.Create<T1>();
             var baseControl = _page.FindControlBySelector(control.GetBaseType(), string.Format("{0} {1}", _selector, searchParameters));
-            control.Wrap(baseControl);
+            control.Wrap(baseControl,false);
             return control;
         }
 
@@ -59,7 +59,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return baseControls.Select(x =>
             {
                 var c = EnhancedControlBaseFactory.Create<T1>();
-                c.Wrap(x);
+                c.Wrap(x, false);
                 return c;
             });
         }
