@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Highway.Insurance.UI.Controls;
 using Highway.Insurance.UI.Exceptions;
 using Microsoft.VisualStudio.TestTools.UITesting;
@@ -46,10 +47,23 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
                 return base.Get<T1>(searchParameters);
             }
             T1 control = EnhancedControlBaseFactory.Create<T1>();
-            var baseControl = _page.FindControlBySelector(typeof(T1), string.Format("{0} {1}", _selector, searchParameters));
+            var baseControl = _page.FindControlBySelector(control.GetBaseType(), string.Format("{0} {1}", _selector, searchParameters));
             control.Wrap(baseControl);
             return control;
         }
+
+        public IEnumerable<T1> Find<T1>(string searchParameters) where T1 : IEnhancedControlBase
+        {
+            T1 control = EnhancedControlBaseFactory.Create<T1>();
+            var baseControls = _page.FindControlsBySelector(control.GetBaseType(), string.Format("{0} {1}", _selector, searchParameters));
+            return baseControls.Select(x =>
+            {
+                var c = EnhancedControlBaseFactory.Create<T1>();
+                c.Wrap(x);
+                return c;
+            });
+        }
+
 
 
         /// <summary>
