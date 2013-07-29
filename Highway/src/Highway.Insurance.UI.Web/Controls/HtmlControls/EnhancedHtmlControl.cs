@@ -15,8 +15,8 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
     public class EnhancedHtmlControl<T> : EnhancedControlBase<T>, IEnhancedHtmlControl
         where T : HtmlControl
     {
-        private WebPage _page;
-        private string _selector;
+        public WebPage Page { get; set; }
+        public string Selector { get; set; }
 
         public EnhancedHtmlControl()
             : base()
@@ -30,8 +30,8 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
 
         public EnhancedHtmlControl(WebPage page, string selector) : base()
         {
-            _page = page;
-            _selector = selector;
+            Page = page;
+            Selector = selector;
             _control = page.FindControlBySelector<T>(selector);
         }
 
@@ -40,25 +40,31 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             _control = (T)control;
         }
 
-        public T1 Get<T1>(string searchParameters) where T1 : IEnhancedControlBase
+        public T1 Get<T1>(string searchParameters) where T1 : IEnhancedHtmlControl
         {
-            if (string.IsNullOrWhiteSpace(_selector))
+            if (string.IsNullOrWhiteSpace(Selector))
             {
                 return base.Get<T1>(searchParameters);
             }
-            T1 control = EnhancedControlBaseFactory.Create<T1>();
-            var baseControl = _page.FindControlBySelector(control.GetBaseType(), string.Format("{0} {1}", _selector, searchParameters));
+            var control = EnhancedHtmlControlBaseFactory.Create<T1>();
+            string selector = string.Format("{0} {1}", Selector, searchParameters);
+            control.Selector = selector;
+            control.Page = Page;
+            var baseControl = Page.FindControlBySelector(control.GetBaseType(), selector);
             control.Wrap(baseControl,false);
             return control;
         }
 
-        public IEnumerable<T1> Find<T1>(string searchParameters) where T1 : IEnhancedControlBase
+        public IEnumerable<T1> Find<T1>(string searchParameters) where T1 : IEnhancedHtmlControl
         {
-            T1 control = EnhancedControlBaseFactory.Create<T1>();
-            var baseControls = _page.FindControlsBySelector(control.GetBaseType(), string.Format("{0} {1}", _selector, searchParameters));
+            T1 control = EnhancedHtmlControlBaseFactory.Create<T1>();
+            string selector = string.Format("{0} {1}", Selector, searchParameters);
+            var baseControls = Page.FindControlsBySelector(control.GetBaseType(), selector);
             return baseControls.Select(x =>
             {
-                var c = EnhancedControlBaseFactory.Create<T1>();
+                var c = EnhancedHtmlControlBaseFactory.Create<T1>();
+                control.Selector = selector;
+                control.Page = Page;
                 c.Wrap(x, false);
                 return c;
             });

@@ -228,16 +228,16 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         /// <param name="searchParameters">In 'Key1=Value1;Key2=Value2' format. For example 'Id=firstname'</param>
         /// <returns>Highway.Insurance _* control object</returns>
         public T Get<T>(string searchParameters = null)
-            where T : IEnhancedControlBase
+            where T : IEnhancedHtmlControl
         {
-            T control = EnhancedControlBaseFactory.Create<T>(searchParameters);
+            T control = EnhancedHtmlControlBaseFactory.Create<T>(searchParameters);
 
-            if (typeof(T).Namespace.Equals("Highway.Insurance .Controls.SilverlightControls"))
+            if (typeof(T).Namespace.Equals("Highway.Insurance.Controls.SilverlightControls"))
             {
                 var baseControl = Activator.CreateInstance(control.GetBaseType(), new object[] { this.SlObjectContainer });
                 control.Wrap(baseControl);
             }
-            else if (typeof(T).Namespace.Equals("Highway.Insurance .Controls.TelerikControls"))
+            else if (typeof(T).Namespace.Equals("Highway.Insurance.Controls.TelerikControls"))
             {
                 var baseControl = Activator.CreateInstance(control.GetBaseType(), new object[] { this.SlObjectContainer });
                 (control as TelerikControls.TelerikComboBox).SetWindow(this);

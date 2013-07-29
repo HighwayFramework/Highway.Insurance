@@ -105,10 +105,12 @@
     <Compile Include="Controls\HtmlControls\EnhancedHtmlUnorderedList.cs" />
     <Compile Include="Controls\HtmlControls\EnhancedHtmlVideo.cs" />
     <Compile Include="Controls\HtmlControls\EnhancedHtmlXml.cs" />
-    <Compile Include="Controls\HtmlControls\IEnhancedHtmlControl.cs" />
+    <Compile Include="Controls\IEnhancedHtmlControl.cs" />
+    <Compile Include="Controls\IEnhancedJQueryControl.cs" />
     <Compile Include="Controls\HtmlControls\WebDialog.cs" />
     <Compile Include="Controls\HtmlControls\WebPage.cs" />
     <Compile Include="Controls\TelerikControls\TelerikComboBox.cs" />
+    <Compile Include="EnhancedControlBaseFactory.cs" />
     <Compile Include="MouseExtensions.cs" />
     <Compile Include="ObjectRepositoryManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
