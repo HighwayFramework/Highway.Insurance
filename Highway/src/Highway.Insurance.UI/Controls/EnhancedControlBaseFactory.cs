@@ -7,7 +7,7 @@ namespace Highway.Insurance.UI.Controls
     /// </summary>
     public class EnhancedControlBaseFactory
     {
-        public static T Create<T>(string sSearchProperties = null, SelectorType selectorType = SelectorType.Default)
+        public static T Create<T>(string sSearchProperties = null)
             where T : IEnhancedControlBase
         {
             Type type = typeof(T);
@@ -18,7 +18,7 @@ namespace Highway.Insurance.UI.Controls
             }
             else
             {
-                return (T)Activator.CreateInstance(type, new object[] { sSearchProperties, selectorType });
+                return (T)Activator.CreateInstance(type, new object[] { sSearchProperties });
             }
         }
     }
