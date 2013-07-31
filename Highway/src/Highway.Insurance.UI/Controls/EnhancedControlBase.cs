@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Windows.Forms;
 using Highway.Insurance.UI.Exceptions;
 using Microsoft.VisualStudio.TestTools.UITest.Extension;
 using Microsoft.VisualStudio.TestTools.UITesting;
@@ -194,15 +195,74 @@ namespace Highway.Insurance.UI.Controls
             this._control.WaitForControlReady();
         }
 
+        public void Click()
+        {
+            Click(ClickPosition.Default);
+        }
+
         /// <summary>
         /// Wraps WaitForControlReady and Click methods for a UITestControl.
         /// </summary>
-        public void Click()
+        public void Click(ClickPosition position)
         {
             this._control.WaitForControlReady();
-            int x = this._control.BoundingRectangle.X + this._control.BoundingRectangle.Width / 2;
-            int y = this._control.BoundingRectangle.Y + this._control.BoundingRectangle.Height / 2;
-            Mouse.Click(new Point(x, y));
+            switch (position)
+            {
+                case ClickPosition.Default:
+                    Mouse.Click(this._control);
+                    return;
+                default:
+                    var point = GetPoint(position);
+                    Mouse.Click(_control,point);
+                    return;
+            }
+        }
+
+        private Point GetPoint(ClickPosition position)
+        {
+            int x = 0;
+            int y = 0;
+            switch (position)
+            {
+                case ClickPosition.BottomCenter:
+                    x = this._control.BoundingRectangle.X + this._control.BoundingRectangle.Width / 2;
+                    y = this._control.BoundingRectangle.Y;
+                    return new Point(x,y);
+                case ClickPosition.BottomLeft:
+                    x = this._control.BoundingRectangle.X;
+                    y = this._control.BoundingRectangle.Y;
+                    return new Point(x, y);
+                case ClickPosition.BottomRight:
+                    x = this._control.BoundingRectangle.X + this._control.BoundingRectangle.Width;
+                    y = this._control.BoundingRectangle.Y;
+                    return new Point(x, y);
+                case ClickPosition.Center:
+                    x = this._control.BoundingRectangle.X + this._control.BoundingRectangle.Width / 2;
+                    y = this._control.BoundingRectangle.Y + this._control.BoundingRectangle.Height / 2;
+                    return new Point(x, y);
+                case ClickPosition.CenterLeft:
+                    x = this._control.BoundingRectangle.X;
+                    y = this._control.BoundingRectangle.Y + this._control.BoundingRectangle.Height / 2;
+                    return new Point(x, y);
+                case ClickPosition.CenterRight:
+                    x = this._control.BoundingRectangle.X + this._control.BoundingRectangle.Width;
+                    y = this._control.BoundingRectangle.Y + this._control.BoundingRectangle.Height / 2;
+                    return new Point(x, y);
+                case ClickPosition.TopLeft:
+                    x = this._control.BoundingRectangle.X;
+                    y = this._control.BoundingRectangle.Y + this._control.BoundingRectangle.Height;
+                    return new Point(x, y);
+                case ClickPosition.TopCenter:
+                    x = this._control.BoundingRectangle.X + this._control.BoundingRectangle.Width / 2;
+                    y = this._control.BoundingRectangle.Y + this._control.BoundingRectangle.Height;
+                    return new Point(x, y);
+                case ClickPosition.TopRight:
+                    x = this._control.BoundingRectangle.X + this._control.BoundingRectangle.Width;
+                    y = this._control.BoundingRectangle.Y + this._control.BoundingRectangle.Height;
+                    return new Point(x, y);
+                default:
+                    return new Point(0,0);
+            }
         }
 
         public void Hover()
@@ -295,9 +355,18 @@ namespace Highway.Insurance.UI.Controls
         #endregion
     }
 
-    public enum SelectorType
+    public enum ClickPosition
     {
-        Default = 0,
-        JQuery
+        Default,
+        Center,
+        TopRight,
+        TopCenter,
+        TopLeft,
+        BottomLeft,
+        BottomCenter,
+        BottomRight,
+        CenterRight,
+        CenterLeft
     }
+
 }

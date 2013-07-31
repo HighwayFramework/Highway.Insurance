@@ -43,5 +43,10 @@ namespace Highway.Insurance.UI.Controls
 
         List<IEnhancedControlBase> GetChildren();
         void Hover();
+
+        /// <summary>
+        /// Wraps WaitForControlReady and Click methods for a UITestControl.
+        /// </summary>
+        void Click(ClickPosition position);
     }
 }

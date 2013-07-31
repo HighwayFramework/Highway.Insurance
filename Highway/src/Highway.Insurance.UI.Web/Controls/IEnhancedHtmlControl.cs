@@ -1,4 +1,5 @@
-﻿using Highway.Insurance.UI.Controls;
+﻿using System.Collections.Generic;
+using Highway.Insurance.UI.Controls;
 using Highway.Insurance.UI.Web.Controls.HtmlControls;
 
 namespace Highway.Insurance.UI.Web.Controls
@@ -19,5 +20,8 @@ namespace Highway.Insurance.UI.Web.Controls
         {
             get; set;
         }
+
+        bool IsVisible();
+        Dictionary<string, string> Data();
     }
 }

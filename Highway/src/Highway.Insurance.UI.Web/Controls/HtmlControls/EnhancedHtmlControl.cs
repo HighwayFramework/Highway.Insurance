@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Highway.Insurance.UI.Controls;
 using Highway.Insurance.UI.Exceptions;
 using Microsoft.VisualStudio.TestTools.UITesting;
@@ -28,7 +29,8 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         {
         }
 
-        public EnhancedHtmlControl(WebPage page, string selector) : base()
+        public EnhancedHtmlControl(WebPage page, string selector)
+            : base()
         {
             Page = page;
             Selector = selector;
@@ -47,9 +49,9 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
                 return base.Get<T1>(searchParameters);
             }
             string selector = string.Format("{0} {1}", Selector, searchParameters);
-            var control = EnhancedHtmlControlBaseFactory.Create<T1>(Page,selector);
+            var control = EnhancedHtmlControlBaseFactory.Create<T1>(Page, selector);
             var baseControl = Page.FindControlBySelector(control.GetBaseType(), selector);
-            control.Wrap(baseControl,false);
+            control.Wrap(baseControl, false);
             return control;
         }
 
@@ -66,7 +68,58 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             });
         }
 
+        private List<Regex> visibilitySearchPatterns = new List<Regex>()
+        {
+            new Regex(@"\s*display\s*:\s*none.*"),
+            new Regex(@"\s*visiblity\s*:\s*hidden.*")
+        };
+        /// <summary>
+        /// Check this control and the parent chain for display: none
+        /// </summary>
+        public bool IsVisible()
+        {
+            try
+            {
+                this._control.WaitForControlExist(1500);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
+            var result = visibilitySearchPatterns.Any(x => x.IsMatch(_control.ControlDefinition));
+            while (result && this.Parent != null && this.Parent is IEnhancedHtmlControl)
+            {
+                result = ((IEnhancedHtmlControl)this.Parent).IsVisible();
+            }
+            return result;
 
+        }
+
+        private Regex dataParameterSearch = new Regex("data-\\w+=\"[^\"]+\"");
+
+        public Dictionary<string, string> Data()
+        {
+            this._control.WaitForControlReady();
+            var data = ParseDataFromDefintion();
+            return data;
+        }
+
+        private Dictionary<string, string> ParseDataFromDefintion()
+        {
+            MatchCollection dataAttributes = dataParameterSearch.Matches(this._control.ControlDefinition);
+            var data = new Dictionary<string, string>();
+            foreach (object dataAttribute in dataAttributes)
+            {
+                var stringData = dataAttribute.ToString();
+                var stringSplit = stringData.Split('=');
+                if (stringSplit.Length != 2) continue;
+                var key = stringSplit[0].ToLowerInvariant().Replace("data-", string.Empty);
+                var value = stringSplit[1].Replace("\"", string.Empty);
+                data.Add(key, value);
+            }
+            return data;
+        }
 
         /// <summary>
         /// Gets the text content of this control.
@@ -219,7 +272,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
                 return ret;
             }
         }
-        
+
         /// <summary>
         /// Returns a list of all first level children of the current Highway.Insurance control.
         /// </summary>
@@ -290,7 +343,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             {
                 _con = new EnhancedHtmlList();
             }
-            else if (control.GetType() == typeof (HtmlListItem))
+            else if (control.GetType() == typeof(HtmlListItem))
             {
                 _con = new EnhancedHtmlListItem();
             }

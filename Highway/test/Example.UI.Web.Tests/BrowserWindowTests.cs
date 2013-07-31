@@ -53,6 +53,25 @@ namespace Example.UI.Web.Tests
             window.Close();
         }
 
+        [TestMethod]
+        public void ShouldFindVisible()
+        {
+            //Arrange
+            string url = CurrentDirectory + "/TestHtmlPage.html";
+            string windowTitle = "A Test";
+            string fullWindowTitle = string.Format("{0} - Windows Internet Explorer", windowTitle);
+
+            //Act
+            TestHtmlPage window = WebPage.Launch<TestHtmlPage>(url);
+
+            //Assert
+            Assert.IsFalse(window.hidden.IsVisible());
+            Assert.IsFalse(window.displayNone.IsVisible());
+
+
+            window.Close();
+        }
+
         [Ignore] // TODO: use known html
         [TestMethod]
         [WorkItem(608)]
