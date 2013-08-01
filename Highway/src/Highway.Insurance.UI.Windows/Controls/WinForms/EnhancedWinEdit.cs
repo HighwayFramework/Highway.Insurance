@@ -6,7 +6,7 @@ namespace Highway.Insurance.UI.Windows.Controls.WinForms
     /// <summary>
     /// Wrapper class for WinEdit
     /// </summary>
-    public class EnhancedWinEdit : EnhancedControlBase<WinEdit>
+    public class EnhancedWinEdit : EnhancedWinControl<WinEdit>
     {
         public EnhancedWinEdit() : base() { }
         public EnhancedWinEdit(string searchParameters) : base(searchParameters) { }

@@ -60,6 +60,7 @@
     <Compile Include="CodedUITestBase.cs" />
     <Compile Include="Controls\IEnhancedWinControl.cs" />
     <Compile Include="Controls\IEnhancedWpfControl.cs" />
+    <Compile Include="Controls\WinForms\EnhancedWinControlFactory.cs" />
     <Compile Include="Controls\WPF\EnhancedWpfControlFactory.cs" />
     <Compile Include="ICodedUIApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -251,144 +251,51 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return control;
         }
 
-        [Obsolete("GetHtmlButton(string) is deprecated, please use Get<Highway.Insurance _HtmlButton>(string) instead.")]
-        public EnhancedHtmlButton GetHtmlButton(string searchParameters)
-        {
-            EnhancedHtmlButton button = new EnhancedHtmlButton(searchParameters);
-            button.Wrap(new HtmlButton(this));
-            return button;
-        }
-
-        [Obsolete("GetHtmlCell(string) is deprecated, please use Get<Highway.Insurance _HtmlCell>(string) instead.")]
-        public EnhancedHtmlCell GetHtmlCell(string searchParameters)
-        {
-            EnhancedHtmlCell cell = new EnhancedHtmlCell(searchParameters);
-            cell.Wrap(new HtmlCell(this));
-            return cell;
-        }
-
-        [Obsolete("GetHtmlCheckBox(string) is deprecated, please use Get<Highway.Insurance _HtmlCheckBox>(string) instead.")]
-        public EnhancedHtmlCheckBox GetHtmlCheckBox(string searchParameters)
-        {
-            EnhancedHtmlCheckBox chk = new EnhancedHtmlCheckBox(searchParameters);
-            chk.Wrap(new HtmlCheckBox(this));
-            return chk;
-        }
-
-        [Obsolete("GetHtmlComboBox(string) is deprecated, please use Get<Highway.Insurance _HtmlComboBox>(string) instead.")]
-        public EnhancedHtmlComboBox GetHtmlComboBox(string searchParameters)
-        {
-            EnhancedHtmlComboBox cmb = new EnhancedHtmlComboBox(searchParameters);
-            cmb.Wrap(new HtmlComboBox(this));
-            return cmb;
-        }
-
-        [Obsolete("GetHtmlDiv(string) is deprecated, please use Get<Highway.Insurance _HtmlDiv>(string) instead.")]
-        public EnhancedHtmlDiv GetHtmlDiv(string searchParameters)
-        {
-            EnhancedHtmlDiv div = new EnhancedHtmlDiv(searchParameters);
-            div.Wrap(new HtmlDiv(this));
-            return div;
-        }
-
-        [Obsolete("GetHtmlEdit(string) is deprecated, please use Get<Highway.Insurance _HtmlEdit>(string) instead.")]
-        public EnhancedHtmlEdit GetHtmlEdit(string searchParameters)
-        {
-            EnhancedHtmlEdit edit = new EnhancedHtmlEdit(searchParameters);
-            edit.Wrap(new HtmlEdit(this));
-            return edit;
-        }
-
-        [Obsolete("GetHtmlFileInput(string) is deprecated, please use Get<Highway.Insurance _HtmlFileInput>(string) instead.")]
-        public EnhancedHtmlFileInput GetHtmlFileInput(string searchParameters)
-        {
-            EnhancedHtmlFileInput fin = new EnhancedHtmlFileInput(searchParameters);
-            fin.Wrap(new HtmlFileInput(this));
-            return fin;
-        }
-
-        [Obsolete("GetHtmlHyperlink(string) is deprecated, please use Get<Highway.Insurance _HtmlHyperlink>(string) instead.")]
-        public EnhancedHtmlHyperlink GetHtmlHyperlink(string searchParameters)
-        {
-            EnhancedHtmlHyperlink href = new EnhancedHtmlHyperlink(searchParameters);
-            href.Wrap(new HtmlHyperlink(this));
-            return href;
-        }
-
-        [Obsolete("GetHtmlImage(string) is deprecated, please use Get<Highway.Insurance _HtmlImage>(string) instead.")]
-        public EnhancedHtmlImage GetHtmlImage(string searchParameters)
-        {
-            EnhancedHtmlImage img = new EnhancedHtmlImage(searchParameters);
-            img.Wrap(new HtmlImage(this));
-            return img;
-        }
-
-        [Obsolete("GetHtmlInputButton(string) is deprecated, please use Get<Highway.Insurance _HtmlInputButton>(string) instead.")]
-        public EnhancedHtmlInputButton GetHtmlInputButton(string searchParameters)
-        {
-            EnhancedHtmlInputButton input = new EnhancedHtmlInputButton(searchParameters);
-            input.Wrap(new HtmlInputButton(this));
-            return input;
-        }
-
-        [Obsolete("GetHtmlLabel(string) is deprecated, please use Get<Highway.Insurance _HtmlLabel>(string) instead.")]
-        public EnhancedHtmlLabel GetHtmlLabel(string searchParameters)
-        {
-            EnhancedHtmlLabel lbl = new EnhancedHtmlLabel(searchParameters);
-            lbl.Wrap(new HtmlLabel(this));
-            return lbl;
-        }
-
-        [Obsolete("GetHtmlList(string) is deprecated, please use Get<Highway.Insurance _HtmlList>(string) instead.")]
-        public EnhancedHtmlList GetHtmlList(string searchParameters)
-        {
-            EnhancedHtmlList lst = new EnhancedHtmlList(searchParameters);
-            lst.Wrap(new HtmlList(this));
-            return lst;
-        }
-
-        [Obsolete("GetHtmlPassword(string) is deprecated, please use Get<Highway.Insurance _HtmlPassword>(string) instead.")]
-        public EnhancedHtmlPassword GetHtmlPassword(string searchParameters)
-        {
-            EnhancedHtmlPassword pwd = new EnhancedHtmlPassword(searchParameters);
-            HtmlEdit tmp = new HtmlEdit(this);
-            tmp.FilterProperties[HtmlEdit.PropertyNames.Type] = "PASSWORD";
-            pwd.Wrap(tmp);
-            return pwd;
-        }
-
-        [Obsolete("GetHtmlRadioButton(string) is deprecated, please use Get<Highway.Insurance _HtmlRadioButton>(string) instead.")]
-        public EnhancedHtmlRadioButton GetHtmlRadioButton(string searchParameters)
-        {
-            EnhancedHtmlRadioButton rad = new EnhancedHtmlRadioButton(searchParameters);
-            rad.Wrap(new HtmlRadioButton(this));
-            return rad;
-        }
-
-        [Obsolete("GetHtmlSpan(string) is deprecated, please use Get<Highway.Insurance _HtmlSpan>(string) instead.")]
-        public EnhancedHtmlSpan GetHtmlSpan(string searchParameters)
-        {
-            EnhancedHtmlSpan span = new EnhancedHtmlSpan(searchParameters);
-            span.Wrap(new HtmlSpan(this));
-            return span;
-        }
-
-        [Obsolete("GetHtmlTable(string) is deprecated, please use Get<Highway.Insurance _HtmlTable>(string) instead.")]
-        public EnhancedHtmlTable GetHtmlTable(string searchParameters)
-        {
-            EnhancedHtmlTable tbl = new EnhancedHtmlTable(searchParameters);
-            tbl.Wrap(new HtmlTable(this));
-            return tbl;
-        }
-
-        [Obsolete("GetHtmlTextArea(string) is deprecated, please use Get<Highway.Insurance _HtmlTextArea>(string) instead.")]
-        public EnhancedHtmlTextArea GetHtmlTextArea(string searchParameters)
-        {
-            EnhancedHtmlTextArea tarea = new EnhancedHtmlTextArea(searchParameters);
-            tarea.Wrap(new HtmlTextArea(this));
-            return tarea;
-        }
-
         #endregion
+
+        internal bool IsVisible(string selector)
+        {
+            return (bool) base.ExecuteScript(string.Format("return $('{0}').is(':visible')", selector));
+        }
+
+        internal HtmlControl GetParent(string selector)
+        {
+            return (HtmlControl) base.ExecuteScript(string.Format("return $('{0}').parent()", selector));
+        }
+
+        internal HtmlControl GetFirstChild(string selector)
+        {
+            object obj = base.ExecuteScript(string.Format("return $('{0}').children()", selector));
+            var list = obj as List<object>;
+            return (HtmlControl) (list != null ? list.First() : null);
+        }
+
+        internal HtmlControl GetNextSibling(string selector)
+        {
+            return (HtmlControl) base.ExecuteScript(string.Format("return $('{0}').next()", selector));
+        }
+
+        internal HtmlControl GetPreviousSibling(string selector)
+        {
+            return (HtmlControl) base.ExecuteScript(string.Format("return $('{0}').prev()", selector));
+        }
+        
+        internal IEnumerable<HtmlControl> GetChildControls(string selector)
+        {
+            object obj = base.ExecuteScript(string.Format("return $('{0}').children()", selector));
+            var list = obj as List<object>;
+            return (list != null ? list.OfType<HtmlControl>() : null);
+        }
+
+
+        public bool CurrentlyExists<T>(EnhancedHtmlControl<T> control) where T : HtmlControl
+        {
+            object obj = base.ExecuteScript(string.Format("return $('{0}')", control.Selector));
+            var list = obj as List<object>;
+            if (list != null) return list.Any();
+            return obj != null;
+        }
+
+
     }
 }

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using Highway.Insurance.UI.Controls;
 
 namespace Highway.Insurance.UI.Windows.Controls
 {
-    public interface IEnhancedWpfControl
+    public interface IEnhancedWpfControl : IEnhancedControlBase
     {
         IEnhancedWpfControl Parent { get; }
 

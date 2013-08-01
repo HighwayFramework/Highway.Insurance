@@ -1062,8 +1062,8 @@ namespace Example.UI.Web.Tests
                 var window = new WebPage("test");
 
                 //Act
-                List<IEnhancedControlBase> collection = window.Get<EnhancedHtmlDiv>("id=div1").GetChildren();
-                foreach (IEnhancedControlBase control in collection)
+                var collection = window.Get<EnhancedHtmlDiv>("id=div1").GetChildren();
+                foreach (var control in collection)
                 {
                     if (control is EnhancedHtmlHyperlink)
                     {

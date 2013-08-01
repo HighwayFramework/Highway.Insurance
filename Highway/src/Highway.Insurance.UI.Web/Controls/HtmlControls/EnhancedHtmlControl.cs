@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using Highway.Insurance.UI.Controls;
 using Highway.Insurance.UI.Exceptions;
 using Microsoft.VisualStudio.TestTools.UITesting;
@@ -35,7 +36,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         {
             Page = page;
             Selector = selector;
-            _control = page.FindControlBySelector<T>(selector);
+            controlFunc = () => page.FindControlBySelector<T>(selector);
         }
 
         public EnhancedHtmlControl(HtmlControl control)
@@ -43,7 +44,13 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             _control = (T)control;
         }
 
-        public T1 Get<T1>(string searchParameters) where T1 : IEnhancedHtmlControl
+        /// <summary>
+        /// Searches in the current control for a control that matches the search parameters
+        /// </summary>
+        /// <typeparam name="T1"></typeparam>
+        /// <param name="searchParameters"></param>
+        /// <returns></returns>
+        public new T1 Get<T1>(string searchParameters) where T1 : IEnhancedHtmlControl
         {
             if (string.IsNullOrWhiteSpace(Selector))
             {
@@ -56,9 +63,15 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return control;
         }
 
-        public IEnumerable<T1> Find<T1>(string searchParameters) where T1 : IEnhancedHtmlControl
+        /// <summary>
+        /// Finds controls inside the current control that match the search criteria
+        /// </summary>
+        /// <typeparam name="T1"></typeparam>
+        /// <param name="elementSelector"></param>
+        /// <returns></returns>
+        public IEnumerable<T1> Find<T1>(string elementSelector) where T1 : IEnhancedHtmlControl
         {
-            string selector = string.Format("{0} {1}", Selector, searchParameters);
+            string selector = string.Format("{0} {1}", Selector, elementSelector);
             T1 control = EnhancedHtmlControlBaseFactory.Create<T1>(Page, selector);
             var baseControls = Page.FindControlsBySelector(control.GetBaseType(), selector);
             return baseControls.Select(x =>
@@ -69,42 +82,350 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             });
         }
 
-        private List<Regex> visibilitySearchPatterns = new List<Regex>()
-        {
-            new Regex(@"\s*display\s*:\s*none.*"),
-            new Regex(@"\s*visiblity\s*:\s*hidden.*")
-        };
         /// <summary>
         /// Check this control and the parent chain for display: none
         /// </summary>
         public bool IsVisible()
         {
-            try
-            {
-                this._control.WaitForControlExist(1500);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-            
-            var result = visibilitySearchPatterns.Any(x => x.IsMatch(_control.ControlDefinition));
-            while (result && this.Parent != null && this.Parent is IEnhancedHtmlControl)
-            {
-                result = ((IEnhancedHtmlControl)this.Parent).IsVisible();
-            }
-            return result;
-
+            if (!string.IsNullOrWhiteSpace(Selector)) return Page.IsVisible(Selector);
+            _control.WaitForControlReady();
+            return !_visibilitySearchPatterns.Any(x => x.IsMatch(_control.ControlDefinition));
         }
 
-        private Regex dataParameterSearch = new Regex("data-\\w+=\"[^\"]+\"");
-
+        /// <summary>
+        /// Parses the data attributes from the html to get data values
+        /// </summary>
+        /// <returns></returns>
         public Dictionary<string, string> Data()
         {
+            JqueryControlPrep();
             this._control.WaitForControlReady();
             var data = ParseDataFromDefintion();
             return data;
         }
+
+        /// <summary>
+        /// Gets the text content of this control.
+        /// </summary>
+        public string InnerText
+        {
+            get
+            {
+                JqueryControlPrep();
+                this._control.WaitForControlReady();
+                return this._control.InnerText;
+            }
+        }
+
+        /// <summary>
+        /// Gets the value of the Help Text attribute of this control.
+        /// </summary>
+        public string HelpText
+        {
+            get
+            {
+                JqueryControlPrep();
+                this._control.WaitForControlReady();
+                return this._control.HelpText;
+            }
+        }
+
+        /// <summary>
+        /// Gets the value of the Title attribute of this control.
+        /// </summary>
+        public string Title
+        {
+            get
+            {
+                JqueryControlPrep(); 
+                this._control.WaitForControlReady();
+                return this._control.Title;
+            }
+        }
+
+        /// <summary>
+        /// Gets the value of the Value attribute of this control.
+        /// </summary>
+        public string ValueAttribute
+        {
+            get
+            {
+                JqueryControlPrep();
+                this._control.WaitForControlReady();
+                return this._control.ValueAttribute;
+            }
+        }
+
+        /// <summary>
+        /// Gets the value of the AccessKey attribute of this control.
+        /// </summary>
+        public string AccessKey
+        {
+            get
+            {
+                JqueryControlPrep();
+                this._control.WaitForControlReady();
+                return this._control.AccessKey;
+            }
+        }
+
+        public bool CurrentlyExists()
+        {
+            return Page.CurrentlyExists(this);
+        }
+
+        /// <summary>
+        /// Gets the parent of the current Highway.Insurance control.
+        /// </summary>
+        public IEnhancedHtmlControl Parent
+        {
+            get
+            {
+                IEnhancedHtmlControl ret = null;
+                try
+                {
+                    ret = WrapUtil(GetParent());
+                }
+                catch (System.ArgumentOutOfRangeException)
+                {
+                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).Parent", this._control.GetType().Name));
+                }
+                return ret;
+            }
+        }
+
+        /// <summary>
+        /// Gets the previous sibling of the current Highway.Insurance control.
+        /// </summary>
+        public IEnhancedHtmlControl PreviousSibling
+        {
+            get
+            {
+                IEnhancedHtmlControl ret = null;
+                try
+                {
+                    ret = WrapUtil(GetPreviousSibling());
+                }
+                catch (System.ArgumentOutOfRangeException)
+                {
+                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).PreviousSibling", this._control.GetType().Name));
+                }
+                return ret;
+            }
+        }
+
+        /// <summary>
+        /// Gets the next sibling of the current Highway.Insurance control.
+        /// </summary>
+        public IEnhancedHtmlControl NextSibling
+        {
+            get
+            {
+                IEnhancedHtmlControl ret = null;
+                try
+                {
+                    ret = WrapUtil(GetNextSibling());
+                }
+                catch (System.ArgumentOutOfRangeException)
+                {
+                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).NextSibling", this._control.GetType().Name));
+                }
+                return ret;
+            }
+        }
+
+        /// <summary>
+        /// Gets the first child of the current Highway.Insurance control.
+        /// </summary>
+        public IEnhancedHtmlControl FirstChild
+        {
+            get
+            {
+                IEnhancedHtmlControl ret = null;
+                try
+                {
+                    ret = WrapUtil(GetFirstChild());
+                }
+                catch (System.ArgumentOutOfRangeException)
+                {
+                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).FirstChild", this._control.GetType().Name));
+                }
+                return ret;
+            }
+        }
+
+        /// <summary>
+        /// Returns a list of all first level children of the current Highway.Insurance control.
+        /// </summary>
+        /// <returns>list of all first level children</returns>
+        public List<IEnhancedHtmlControl> GetChildren()
+        {
+            this._control.WaitForControlReady();
+            var children = GetChildrenControls();
+            return children.Select(WrapUtil).ToList();
+        }
+
+        private static IEnhancedHtmlControl WrapUtil(HtmlControl control)
+        {
+            IEnhancedHtmlControl con = null;
+            if (control.GetType() == typeof(HtmlButton))
+            {
+                con = new EnhancedHtmlButton();
+            }
+            else if (control.GetType() == typeof(HtmlCheckBox))
+            {
+                con = new EnhancedHtmlCheckBox();
+            }
+            else if (control.GetType() == typeof(HtmlComboBox))
+            {
+                con = new EnhancedHtmlComboBox();
+            }
+            else if (control.GetType() == typeof(HtmlDiv))
+            {
+                con = new EnhancedHtmlDiv();
+            }
+            else if (control.GetType() == typeof(HtmlEdit) && (string.Compare(control.Type, "password", true) == 0))
+            {
+                con = new EnhancedHtmlPassword();
+            }
+            else if (control.GetType() == typeof(HtmlEdit))
+            {
+                con = new EnhancedHtmlEdit();
+            }
+            else if (control.GetType() == typeof(HtmlEditableDiv))
+            {
+                con = new EnhancedHtmlEditableDiv();
+            }
+            else if (control.GetType() == typeof(HtmlFileInput))
+            {
+                con = new EnhancedHtmlFileInput();
+            }
+            else if (control.GetType() == typeof(HtmlHyperlink))
+            {
+                con = new EnhancedHtmlHyperlink();
+            }
+            else if (control.GetType() == typeof(HtmlImage))
+            {
+                con = new EnhancedHtmlImage();
+            }
+            else if (control.GetType() == typeof(HtmlInputButton))
+            {
+                con = new EnhancedHtmlInputButton();
+            }
+            else if (control.GetType() == typeof(HtmlLabel))
+            {
+                con = new EnhancedHtmlLabel();
+            }
+            else if (control.GetType() == typeof(HtmlList))
+            {
+                con = new EnhancedHtmlList();
+            }
+            else if (control.GetType() == typeof(HtmlListItem))
+            {
+                con = new EnhancedHtmlListItem();
+            }
+            else if (control.GetType() == typeof(HtmlRadioButton))
+            {
+                con = new EnhancedHtmlRadioButton();
+            }
+            else if (control.GetType() == typeof(HtmlSpan))
+            {
+                con = new EnhancedHtmlSpan();
+            }
+            else if (control.GetType() == typeof(HtmlEditableSpan))
+            {
+                con = new EnhancedHtmlEditableSpan();
+            }
+            else if (control.GetType() == typeof(HtmlTable))
+            {
+                con = new EnhancedHtmlTable();
+            }
+            else if (control.GetType() == typeof(HtmlCell))
+            {
+                con = new EnhancedHtmlCell();
+            }
+            else if (control.GetType() == typeof(HtmlTextArea))
+            {
+                con = new EnhancedHtmlTextArea();
+            }
+            else if (control.GetType() == typeof(HtmlScrollBar))
+            {
+                con = new EnhancedHtmlScrollBar();
+            }
+            else if (control.GetType() == typeof(HtmlTextArea))
+            {
+                con = new EnhancedHtmlTextArea();
+            }
+            else if (control.GetType() == typeof(HtmlCustom))
+            {
+                switch (control.TagName.ToLower())
+                {
+                    case "p":
+                        con = new EnhancedHtmlParagraph();
+                        break;
+                    case "h1":
+                        con = new EnhancedHtmlHeading1();
+                        break;
+                    case "h2":
+                        con = new EnhancedHtmlHeading2();
+                        break;
+                    case "h3":
+                        con = new EnhancedHtmlHeading3();
+                        break;
+                    case "h4":
+                        con = new EnhancedHtmlHeading4();
+                        break;
+                    case "h5":
+                        con = new EnhancedHtmlHeading5();
+                        break;
+                    case "h6":
+                        con = new EnhancedHtmlHeading6();
+                        break;
+                    case "ul":
+                        con = new EnhancedHtmlUnorderedList();
+                        break;
+                    case "ol":
+                        con = new EnhancedHtmlOrderedList();
+                        break;
+                    case "ins":
+                        con = new EnhancedHtmlIns();
+                        break;
+                    default:
+                        con = new EnhancedHtmlCustom(control.TagName);
+                        break;
+                }
+            }
+            else
+            {
+                throw new Exception(string.Format("WrapUtil: '{0}' not supported", control.GetType().Name));
+            }
+            con.WrapReady(control);
+            return con;
+        }
+
+        private int GetMyIndexAmongSiblings()
+        {
+            int i = -1;
+            foreach (UITestControl uitestcontrol in this._control.GetParent().GetChildren())
+            {
+                i++;
+                if (uitestcontrol == this._control)
+                {
+                    break;
+                }
+            }
+            return i;
+        }
+
+        private readonly List<Regex> _visibilitySearchPatterns = new List<Regex>()
+        {
+            new Regex(@"\s*display\s*:\s*none.*"),
+            new Regex(@"\s*visiblity\s*:\s*hidden.*")
+        };
+
+        private Regex dataParameterSearch = new Regex("data-\\w+=\"[^\"]+\"");
+
+        private Func<T> controlFunc;
 
         private Dictionary<string, string> ParseDataFromDefintion()
         {
@@ -122,330 +443,87 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return data;
         }
 
-        /// <summary>
-        /// Gets the text content of this control.
-        /// </summary>
-        public string InnerText
+        private void JqueryControlPrep()
         {
-            get
-            {
-                this._control.WaitForControlReady();
-                return this._control.InnerText;
-            }
+            if (controlFunc != null) _control = controlFunc();
         }
 
-        /// <summary>
-        /// Gets the value of the Help Text attribute of this control.
-        /// </summary>
-        public string HelpText
+
+        private HtmlControl GetParent()
         {
-            get
+            HtmlControl parent;
+            if (string.IsNullOrWhiteSpace(Selector))
             {
-                this._control.WaitForControlReady();
-                return this._control.HelpText;
-            }
-        }
-
-        /// <summary>
-        /// Gets the value of the Title attribute of this control.
-        /// </summary>
-        public string Title
-        {
-            get
-            {
-                this._control.WaitForControlReady();
-                return this._control.Title;
-            }
-        }
-
-        /// <summary>
-        /// Gets the value of the Value attribute of this control.
-        /// </summary>
-        public string ValueAttribute
-        {
-            get
-            {
-                this._control.WaitForControlReady();
-                return this._control.ValueAttribute;
-            }
-        }
-
-        /// <summary>
-        /// Gets the value of the AccessKey attribute of this control.
-        /// </summary>
-        public string AccessKey
-        {
-            get
-            {
-                this._control.WaitForControlReady();
-                return this._control.AccessKey;
-            }
-        }
-
-        /// <summary>
-        /// Gets the parent of the current Highway.Insurance control.
-        /// </summary>
-        public IEnhancedHtmlControl Parent
-        {
-            get
-            {
-                this._control.WaitForControlReady();
-                IEnhancedHtmlControl ret = null;
-                try
-                {
-                    ret = WrapUtil((HtmlControl)this._control.GetParent());
-                }
-                catch (System.ArgumentOutOfRangeException)
-                {
-                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).Parent", this._control.GetType().Name));
-                }
-                return ret;
-            }
-        }
-
-        /// <summary>
-        /// Gets the previous sibling of the current Highway.Insurance control.
-        /// </summary>
-        public IEnhancedHtmlControl PreviousSibling
-        {
-            get
-            {
-                this._control.WaitForControlReady();
-                IEnhancedHtmlControl ret = null;
-                try
-                {
-                    ret = WrapUtil((HtmlControl)this._control.GetParent().GetChildren()[GetMyIndexAmongSiblings() - 1]);
-                }
-                catch (System.ArgumentOutOfRangeException)
-                {
-                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).PreviousSibling", this._control.GetType().Name));
-                }
-                return ret;
-            }
-        }
-
-        /// <summary>
-        /// Gets the next sibling of the current Highway.Insurance control.
-        /// </summary>
-        public IEnhancedHtmlControl NextSibling
-        {
-            get
-            {
-                this._control.WaitForControlReady();
-                IEnhancedHtmlControl ret = null;
-                try
-                {
-                    UITestControl parent = this._control.GetParent();
-
-                    UITestControlCollection children = parent.GetChildren();
-
-                    int thisIndex = GetMyIndexAmongSiblings();
-
-                    UITestControl child = children[thisIndex + 1];
-
-                    ret = WrapUtil((HtmlControl)child);
-                }
-                catch (System.ArgumentOutOfRangeException)
-                {
-                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).NextSibling", this._control.GetType().Name));
-                }
-                return ret;
-            }
-        }
-
-        /// <summary>
-        /// Gets the first child of the current Highway.Insurance control.
-        /// </summary>
-        public IEnhancedHtmlControl FirstChild
-        {
-            get
-            {
-                this._control.WaitForControlReady();
-                IEnhancedHtmlControl ret = null;
-                try
-                {
-                    ret = WrapUtil((HtmlControl)this._control.GetChildren()[0]);
-                }
-                catch (System.ArgumentOutOfRangeException)
-                {
-                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).FirstChild", this._control.GetType().Name));
-                }
-                return ret;
-            }
-        }
-
-        /// <summary>
-        /// Returns a list of all first level children of the current Highway.Insurance control.
-        /// </summary>
-        /// <returns>list of all first level children</returns>
-        public List<IEnhancedHtmlControl> GetChildren()
-        {
-            this._control.WaitForControlReady();
-            var uicol = new List<IEnhancedHtmlControl>();
-            foreach (UITestControl uitestcontrol in this._control.GetChildren())
-            {
-                uicol.Add(WrapUtil((HtmlControl)uitestcontrol));
-            }
-            return uicol;
-        }
-
-        private static IEnhancedHtmlControl WrapUtil(HtmlControl control)
-        {
-            IEnhancedHtmlControl _con = null;
-            if (control.GetType() == typeof(HtmlButton))
-            {
-                _con = new EnhancedHtmlButton();
-            }
-            else if (control.GetType() == typeof(HtmlCheckBox))
-            {
-                _con = new EnhancedHtmlCheckBox();
-            }
-            else if (control.GetType() == typeof(HtmlComboBox))
-            {
-                _con = new EnhancedHtmlComboBox();
-            }
-            else if (control.GetType() == typeof(HtmlDiv))
-            {
-                _con = new EnhancedHtmlDiv();
-            }
-            else if (control.GetType() == typeof(HtmlEdit) && (string.Compare(control.Type, "password", true) == 0))
-            {
-                _con = new EnhancedHtmlPassword();
-            }
-            else if (control.GetType() == typeof(HtmlEdit))
-            {
-                _con = new EnhancedHtmlEdit();
-            }
-            else if (control.GetType() == typeof(HtmlEditableDiv))
-            {
-                _con = new EnhancedHtmlEditableDiv();
-            }
-            else if (control.GetType() == typeof(HtmlFileInput))
-            {
-                _con = new EnhancedHtmlFileInput();
-            }
-            else if (control.GetType() == typeof(HtmlHyperlink))
-            {
-                _con = new EnhancedHtmlHyperlink();
-            }
-            else if (control.GetType() == typeof(HtmlImage))
-            {
-                _con = new EnhancedHtmlImage();
-            }
-            else if (control.GetType() == typeof(HtmlInputButton))
-            {
-                _con = new EnhancedHtmlInputButton();
-            }
-            else if (control.GetType() == typeof(HtmlLabel))
-            {
-                _con = new EnhancedHtmlLabel();
-            }
-            else if (control.GetType() == typeof(HtmlList))
-            {
-                _con = new EnhancedHtmlList();
-            }
-            else if (control.GetType() == typeof(HtmlListItem))
-            {
-                _con = new EnhancedHtmlListItem();
-            }
-            else if (control.GetType() == typeof(HtmlRadioButton))
-            {
-                _con = new EnhancedHtmlRadioButton();
-            }
-            else if (control.GetType() == typeof(HtmlSpan))
-            {
-                _con = new EnhancedHtmlSpan();
-            }
-            else if (control.GetType() == typeof(HtmlEditableSpan))
-            {
-                _con = new EnhancedHtmlEditableSpan();
-            }
-            else if (control.GetType() == typeof(HtmlTable))
-            {
-                _con = new EnhancedHtmlTable();
-            }
-            else if (control.GetType() == typeof(HtmlCell))
-            {
-                _con = new EnhancedHtmlCell();
-            }
-            else if (control.GetType() == typeof(HtmlTextArea))
-            {
-                _con = new EnhancedHtmlTextArea();
-            }
-            else if (control.GetType() == typeof(HtmlScrollBar))
-            {
-                _con = new EnhancedHtmlScrollBar();
-            }
-            else if (control.GetType() == typeof(HtmlTextArea))
-            {
-                _con = new EnhancedHtmlTextArea();
-            }
-            else if (control.GetType() == typeof(HtmlCustom))
-            {
-                switch (control.TagName.ToLower())
-                {
-                    case "p":
-                        _con = new EnhancedHtmlParagraph();
-                        break;
-                    case "h1":
-                        _con = new EnhancedHtmlHeading1();
-                        break;
-                    case "h2":
-                        _con = new EnhancedHtmlHeading2();
-                        break;
-                    case "h3":
-                        _con = new EnhancedHtmlHeading3();
-                        break;
-                    case "h4":
-                        _con = new EnhancedHtmlHeading4();
-                        break;
-                    case "h5":
-                        _con = new EnhancedHtmlHeading5();
-                        break;
-                    case "h6":
-                        _con = new EnhancedHtmlHeading6();
-                        break;
-                    case "ul":
-                        _con = new EnhancedHtmlUnorderedList();
-                        break;
-                    case "ol":
-                        _con = new EnhancedHtmlOrderedList();
-                        break;
-                    case "ins":
-                        _con = new EnhancedHtmlIns();
-                        break;
-                    default:
-                        _con = new EnhancedHtmlCustom(control.TagName);
-                        break;
-                }
+                parent = Page.GetParent(Selector);
             }
             else
             {
-                throw new Exception(string.Format("WrapUtil: '{0}' not supported", control.GetType().Name));
+                this._control.WaitForControlReady();
+                parent = (HtmlControl)this._control.GetParent();
             }
-            _con.WrapReady(control);
-            return _con;
+            return parent;
         }
 
-        private int GetMyIndexAmongSiblings()
+        private HtmlControl GetPreviousSibling()
         {
-            int i = -1;
-            foreach (UITestControl uitestcontrol in this._control.GetParent().GetChildren())
+            HtmlControl sibling;
+            if (string.IsNullOrWhiteSpace(Selector))
             {
-                i++;
-                if (uitestcontrol == this._control)
-                {
-                    break;
-                }
+                sibling = Page.GetParent(Selector);
             }
-            return i;
+            else
+            {
+                this._control.WaitForControlReady();
+                sibling = (HtmlControl)this._control.GetParent().GetChildren()[GetMyIndexAmongSiblings() - 1];
+            }
+            return sibling;
+
         }
 
-    }
+        public HtmlControl GetNextSibling()
+        {
+            HtmlControl sibling;
+            if (string.IsNullOrWhiteSpace(Selector))
+            {
+                sibling = Page.GetParent(Selector);
+            }
+            else
+            {
+                this._control.WaitForControlReady();
+                sibling = (HtmlControl)this._control.GetParent().GetChildren()[GetMyIndexAmongSiblings() + 1];
+            }
+            return sibling;
+        }
 
-    public enum SelectorType
-    {
-        Default = 0,
-        JQuery
+        private HtmlControl GetFirstChild()
+        {
+            HtmlControl firstChild;
+            if (string.IsNullOrWhiteSpace(Selector))
+            {
+                firstChild = Page.GetFirstChild(Selector);
+            }
+            else
+            {
+                this._control.WaitForControlReady();
+                firstChild = (HtmlControl)this._control.GetParent().GetChildren()[0];
+            }
+            return firstChild;
+        }
+
+        private IEnumerable<HtmlControl> GetChildrenControls()
+        {
+            List<HtmlControl> children = new List<HtmlControl>();
+            if (string.IsNullOrWhiteSpace(Selector))
+            {
+                children.AddRange(Page.GetChildControls(Selector));
+            }
+            else
+            {
+                this._control.WaitForControlReady();
+                children.AddRange(this._control.GetParent().GetChildren().Select(x=> (HtmlControl)x));
+            }
+            return children;
+        }
+
     }
 }

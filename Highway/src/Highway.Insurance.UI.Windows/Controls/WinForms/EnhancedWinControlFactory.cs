@@ -1,26 +1,26 @@
 ﻿using System;
 using Highway.Insurance.UI.Controls;
-using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
+using Microsoft.VisualStudio.TestTools.UITesting.WinControls;
 
-namespace Highway.Insurance.UI.Windows.Controls.WPF
+namespace Highway.Insurance.UI.Windows.Controls.WinForms
 {
     /// <summary>
-    /// Factory class for creating _Wpf* controls. Inherits from _ControlBaseFactory
+    /// Factory class for creating _Win* controls. Inherits from _ControlBaseFactory
     /// </summary>
-    public class EnhancedWpfControlFactory : EnhancedControlBaseFactory
+    public class EnhancedWinControlFactory : EnhancedControlBaseFactory
     {
         /// <summary>
-        /// Create a _Wpf* control based on the type of provided WpfControl.
+        /// Create a _Win* control based on the type of provided WinControl.
         /// </summary>
         /// <param name="control"></param>
         /// <returns></returns>
-        public static IEnhancedWpfControl Create(WpfControl control)
+        public static IEnhancedWinControl Create(WinControl control)
         {
             string Prefix = ".Enhanced";
             string controlTypeName = control.GetType().Name;
-            string Namespace = typeof(EnhancedWpfControlFactory).Namespace;
+            string Namespace = typeof(EnhancedWinControlFactory).Namespace;
 
-            // Get  type based on WpfControl type and namespace
+            // Get  type based on WinControl type and namespace
             Type Type = Type.GetType(Namespace + Prefix + controlTypeName);
 
             // The type will be null if it does not exist
@@ -30,7 +30,7 @@ namespace Highway.Insurance.UI.Windows.Controls.WPF
             }
 
             // Create  control
-            IEnhancedWpfControl enhancedControl = (IEnhancedWpfControl)Activator.CreateInstance(Type);
+            var enhancedControl = (IEnhancedWinControl)Activator.CreateInstance(Type);
 
             // Wrap WinControl
             enhancedControl.WrapReady(control);

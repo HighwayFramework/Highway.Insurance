@@ -23,5 +23,6 @@ namespace Highway.Insurance.UI.Web.Controls
         IEnhancedHtmlControl FirstChild { get; }
 
         List<IEnhancedHtmlControl> GetChildren();
+        bool CurrentlyExists();
     }
 }
