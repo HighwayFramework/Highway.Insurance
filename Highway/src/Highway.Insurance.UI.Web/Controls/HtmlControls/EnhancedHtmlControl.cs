@@ -21,6 +21,19 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         internal WebPage Page { get; set; }
         internal string Selector { get; set; }
 
+        protected override T Control
+        {
+            get
+            {
+                JqueryControlPrep();
+                return _control;
+            }
+            set
+            {
+                _control = value;
+            }
+        }
+
         public EnhancedHtmlControl()
             : base()
         {
@@ -41,7 +54,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
 
         public EnhancedHtmlControl(HtmlControl control)
         {
-            _control = (T)control;
+            Control = (T)control;
         }
 
         /// <summary>
@@ -88,8 +101,8 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         public bool IsVisible()
         {
             if (!string.IsNullOrWhiteSpace(Selector)) return Page.IsVisible(Selector);
-            _control.WaitForControlReady();
-            return !_visibilitySearchPatterns.Any(x => x.IsMatch(_control.ControlDefinition));
+            Control.WaitForControlReady();
+            return !_visibilitySearchPatterns.Any(x => x.IsMatch(Control.ControlDefinition));
         }
 
         /// <summary>
@@ -98,8 +111,8 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         /// <returns></returns>
         public Dictionary<string, string> Data()
         {
-            JqueryControlPrep();
-            this._control.WaitForControlReady();
+            
+            this.Control.WaitForControlReady();
             var data = ParseDataFromDefintion();
             return data;
         }
@@ -111,9 +124,9 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         {
             get
             {
-                JqueryControlPrep();
-                this._control.WaitForControlReady();
-                return this._control.InnerText;
+                
+                this.Control.WaitForControlReady();
+                return this.Control.InnerText;
             }
         }
 
@@ -124,9 +137,9 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         {
             get
             {
-                JqueryControlPrep();
-                this._control.WaitForControlReady();
-                return this._control.HelpText;
+                
+                this.Control.WaitForControlReady();
+                return this.Control.HelpText;
             }
         }
 
@@ -137,9 +150,9 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         {
             get
             {
-                JqueryControlPrep(); 
-                this._control.WaitForControlReady();
-                return this._control.Title;
+                 
+                this.Control.WaitForControlReady();
+                return this.Control.Title;
             }
         }
 
@@ -150,9 +163,9 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         {
             get
             {
-                JqueryControlPrep();
-                this._control.WaitForControlReady();
-                return this._control.ValueAttribute;
+                
+                this.Control.WaitForControlReady();
+                return this.Control.ValueAttribute;
             }
         }
 
@@ -163,9 +176,9 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         {
             get
             {
-                JqueryControlPrep();
-                this._control.WaitForControlReady();
-                return this._control.AccessKey;
+                
+                this.Control.WaitForControlReady();
+                return this.Control.AccessKey;
             }
         }
 
@@ -188,7 +201,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
                 }
                 catch (System.ArgumentOutOfRangeException)
                 {
-                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).Parent", this._control.GetType().Name));
+                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).Parent", this.Control.GetType().Name));
                 }
                 return ret;
             }
@@ -208,7 +221,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
                 }
                 catch (System.ArgumentOutOfRangeException)
                 {
-                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).PreviousSibling", this._control.GetType().Name));
+                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).PreviousSibling", this.Control.GetType().Name));
                 }
                 return ret;
             }
@@ -228,7 +241,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
                 }
                 catch (System.ArgumentOutOfRangeException)
                 {
-                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).NextSibling", this._control.GetType().Name));
+                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).NextSibling", this.Control.GetType().Name));
                 }
                 return ret;
             }
@@ -248,7 +261,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
                 }
                 catch (System.ArgumentOutOfRangeException)
                 {
-                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).FirstChild", this._control.GetType().Name));
+                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).FirstChild", this.Control.GetType().Name));
                 }
                 return ret;
             }
@@ -260,7 +273,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         /// <returns>list of all first level children</returns>
         public List<IEnhancedHtmlControl> GetChildren()
         {
-            this._control.WaitForControlReady();
+            this.Control.WaitForControlReady();
             var children = GetChildrenControls();
             return children.Select(WrapUtil).ToList();
         }
@@ -406,10 +419,10 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         private int GetMyIndexAmongSiblings()
         {
             int i = -1;
-            foreach (UITestControl uitestcontrol in this._control.GetParent().GetChildren())
+            foreach (UITestControl uitestcontrol in this.Control.GetParent().GetChildren())
             {
                 i++;
-                if (uitestcontrol == this._control)
+                if (uitestcontrol == this.Control)
                 {
                     break;
                 }
@@ -429,7 +442,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
 
         private Dictionary<string, string> ParseDataFromDefintion()
         {
-            MatchCollection dataAttributes = dataParameterSearch.Matches(this._control.ControlDefinition);
+            MatchCollection dataAttributes = dataParameterSearch.Matches(this.Control.ControlDefinition);
             var data = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
             foreach (object dataAttribute in dataAttributes)
             {
@@ -445,7 +458,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
 
         private void JqueryControlPrep()
         {
-            if (controlFunc != null) _control = controlFunc();
+            if (controlFunc != null) Control = controlFunc();
         }
 
 
@@ -458,8 +471,8 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             }
             else
             {
-                this._control.WaitForControlReady();
-                parent = (HtmlControl)this._control.GetParent();
+                this.Control.WaitForControlReady();
+                parent = (HtmlControl)this.Control.GetParent();
             }
             return parent;
         }
@@ -473,8 +486,8 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             }
             else
             {
-                this._control.WaitForControlReady();
-                sibling = (HtmlControl)this._control.GetParent().GetChildren()[GetMyIndexAmongSiblings() - 1];
+                this.Control.WaitForControlReady();
+                sibling = (HtmlControl)this.Control.GetParent().GetChildren()[GetMyIndexAmongSiblings() - 1];
             }
             return sibling;
 
@@ -489,8 +502,8 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             }
             else
             {
-                this._control.WaitForControlReady();
-                sibling = (HtmlControl)this._control.GetParent().GetChildren()[GetMyIndexAmongSiblings() + 1];
+                this.Control.WaitForControlReady();
+                sibling = (HtmlControl)this.Control.GetParent().GetChildren()[GetMyIndexAmongSiblings() + 1];
             }
             return sibling;
         }
@@ -504,8 +517,8 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             }
             else
             {
-                this._control.WaitForControlReady();
-                firstChild = (HtmlControl)this._control.GetParent().GetChildren()[0];
+                this.Control.WaitForControlReady();
+                firstChild = (HtmlControl)this.Control.GetParent().GetChildren()[0];
             }
             return firstChild;
         }
@@ -519,8 +532,8 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             }
             else
             {
-                this._control.WaitForControlReady();
-                children.AddRange(this._control.GetParent().GetChildren().Select(x=> (HtmlControl)x));
+                this.Control.WaitForControlReady();
+                children.AddRange(this.Control.GetParent().GetChildren().Select(x=> (HtmlControl)x));
             }
             return children;
         }

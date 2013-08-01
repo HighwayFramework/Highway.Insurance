@@ -24,17 +24,17 @@ namespace Highway.Insurance.UI.Windows.Controls.WPF
         {
             get
             {
-                this._control.WaitForControlReady();
+                this.Control.WaitForControlReady();
 
                 IEnhancedWpfControl ret = null;
 
                 try
                 {
-                    ret = EnhancedWpfControlFactory.Create((WpfControl)this._control.GetParent());
+                    ret = EnhancedWpfControlFactory.Create((WpfControl)this.Control.GetParent());
                 }
                 catch (System.ArgumentOutOfRangeException)
                 {
-                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).Parent", this._control.GetType().Name));
+                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).Parent", this.Control.GetType().Name));
                 }
                 return ret;
             }
@@ -47,15 +47,15 @@ namespace Highway.Insurance.UI.Windows.Controls.WPF
         {
             get
             {
-                this._control.WaitForControlReady();
+                this.Control.WaitForControlReady();
                 IEnhancedWpfControl ret = null;
                 try
                 {
-                    ret = WrapUtil((WpfControl)this._control.GetParent().GetChildren()[GetMyIndexAmongSiblings() - 1]);
+                    ret = WrapUtil((WpfControl)this.Control.GetParent().GetChildren()[GetMyIndexAmongSiblings() - 1]);
                 }
                 catch (System.ArgumentOutOfRangeException)
                 {
-                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).PreviousSibling", this._control.GetType().Name));
+                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).PreviousSibling", this.Control.GetType().Name));
                 }
                 return ret;
             }
@@ -68,11 +68,11 @@ namespace Highway.Insurance.UI.Windows.Controls.WPF
         {
             get
             {
-                this._control.WaitForControlReady();
+                this.Control.WaitForControlReady();
                 IEnhancedWpfControl ret = null;
                 try
                 {
-                    UITestControl parent = this._control.GetParent();
+                    UITestControl parent = this.Control.GetParent();
 
                     UITestControlCollection children = parent.GetChildren();
 
@@ -84,7 +84,7 @@ namespace Highway.Insurance.UI.Windows.Controls.WPF
                 }
                 catch (System.ArgumentOutOfRangeException)
                 {
-                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).NextSibling", this._control.GetType().Name));
+                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).NextSibling", this.Control.GetType().Name));
                 }
                 return ret;
             }
@@ -97,15 +97,15 @@ namespace Highway.Insurance.UI.Windows.Controls.WPF
         {
             get
             {
-                this._control.WaitForControlReady();
+                this.Control.WaitForControlReady();
                 IEnhancedWpfControl ret = null;
                 try
                 {
-                    ret = WrapUtil((WpfControl)this._control.GetChildren()[0]);
+                    ret = WrapUtil((WpfControl)this.Control.GetChildren()[0]);
                 }
                 catch (System.ArgumentOutOfRangeException)
                 {
-                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).FirstChild", this._control.GetType().Name));
+                    throw new HighwayInsuranceInvalidTraversal(string.Format("({0}).FirstChild", this.Control.GetType().Name));
                 }
                 return ret;
             }
@@ -117,9 +117,9 @@ namespace Highway.Insurance.UI.Windows.Controls.WPF
         /// <returns>list of all first level children</returns>
         public List<IEnhancedWpfControl> GetChildren()
         {
-            this._control.WaitForControlReady();
+            this.Control.WaitForControlReady();
             var uicol = new List<IEnhancedWpfControl>();
-            foreach (UITestControl uitestcontrol in this._control.GetChildren())
+            foreach (UITestControl uitestcontrol in this.Control.GetChildren())
             {
                 uicol.Add(WrapUtil((WpfControl)uitestcontrol));
             }
@@ -189,10 +189,10 @@ namespace Highway.Insurance.UI.Windows.Controls.WPF
         private int GetMyIndexAmongSiblings()
         {
             int i = -1;
-            foreach (UITestControl uitestcontrol in this._control.GetParent().GetChildren())
+            foreach (UITestControl uitestcontrol in this.Control.GetParent().GetChildren())
             {
                 i++;
-                if (uitestcontrol == this._control)
+                if (uitestcontrol == this.Control)
                 {
                     break;
                 }

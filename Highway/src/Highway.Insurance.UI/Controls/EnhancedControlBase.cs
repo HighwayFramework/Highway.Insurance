@@ -19,6 +19,12 @@ namespace Highway.Insurance.UI.Controls
         where T : UITestControl
     {
         protected T _control;
+
+        protected virtual T Control
+        {
+            get { return _control; }
+            set { _control = value; }
+        }
         protected PropertyExpressionCollection SearchProperties;
         private string _jquerySelector; 
         private bool _isJquery;
@@ -158,11 +164,11 @@ namespace Highway.Insurance.UI.Controls
         /// <param name="control"></param>
         public virtual void Wrap(object control, bool setSearchProperties = true)
         {
-            this._control = control as T;
+            this.Control = control as T;
             if (setSearchProperties)
             {
-                this._control.SearchProperties.AddRange(this.SearchProperties);
-                this._control.SearchConfigurations.Add(SearchConfiguration.AlwaysSearch);
+                this.Control.SearchProperties.AddRange(this.SearchProperties);
+                this.Control.SearchConfigurations.Add(SearchConfiguration.AlwaysSearch);
             }
         }
 
@@ -174,7 +180,7 @@ namespace Highway.Insurance.UI.Controls
         /// <returns>The underlying UITestControl instance. For example, returns HtmlEdit in case of Highway.Insurance.EnhancedHtmlEdit.</returns>
         public T UnWrap()
         {
-            return this._control;
+            return this.Control;
         }
 
         /// <summary>
@@ -184,7 +190,7 @@ namespace Highway.Insurance.UI.Controls
         /// <param name="control"></param>
         public void WrapReady(object control)
         {
-            this._control = control as T;
+            this.Control = control as T;
         }
 
         /// <summary>
@@ -192,7 +198,7 @@ namespace Highway.Insurance.UI.Controls
         /// </summary>
         public void WaitForControlReady()
         {
-            this._control.WaitForControlReady();
+            this.Control.WaitForControlReady();
         }
 
         public void Click()
@@ -205,15 +211,15 @@ namespace Highway.Insurance.UI.Controls
         /// </summary>
         public void Click(ClickPosition position)
         {
-            this._control.WaitForControlReady();
+            this.Control.WaitForControlReady();
             switch (position)
             {
                 case ClickPosition.Default:
-                    Mouse.Click(this._control);
+                    Mouse.Click(this.Control);
                     return;
                 default:
                     var point = GetPoint(position);
-                    Mouse.Click(_control,point);
+                    Mouse.Click(Control,point);
                     return;
             }
         }
@@ -225,40 +231,40 @@ namespace Highway.Insurance.UI.Controls
             switch (position)
             {
                 case ClickPosition.BottomCenter:
-                    x = this._control.BoundingRectangle.X + this._control.BoundingRectangle.Width / 2;
-                    y = this._control.BoundingRectangle.Y;
+                    x = this.Control.BoundingRectangle.X + this.Control.BoundingRectangle.Width / 2;
+                    y = this.Control.BoundingRectangle.Y;
                     return new Point(x,y);
                 case ClickPosition.BottomLeft:
-                    x = this._control.BoundingRectangle.X;
-                    y = this._control.BoundingRectangle.Y;
+                    x = this.Control.BoundingRectangle.X;
+                    y = this.Control.BoundingRectangle.Y;
                     return new Point(x, y);
                 case ClickPosition.BottomRight:
-                    x = this._control.BoundingRectangle.X + this._control.BoundingRectangle.Width;
-                    y = this._control.BoundingRectangle.Y;
+                    x = this.Control.BoundingRectangle.X + this.Control.BoundingRectangle.Width;
+                    y = this.Control.BoundingRectangle.Y;
                     return new Point(x, y);
                 case ClickPosition.Center:
-                    x = this._control.BoundingRectangle.X + this._control.BoundingRectangle.Width / 2;
-                    y = this._control.BoundingRectangle.Y + this._control.BoundingRectangle.Height / 2;
+                    x = this.Control.BoundingRectangle.X + this.Control.BoundingRectangle.Width / 2;
+                    y = this.Control.BoundingRectangle.Y + this.Control.BoundingRectangle.Height / 2;
                     return new Point(x, y);
                 case ClickPosition.CenterLeft:
-                    x = this._control.BoundingRectangle.X;
-                    y = this._control.BoundingRectangle.Y + this._control.BoundingRectangle.Height / 2;
+                    x = this.Control.BoundingRectangle.X;
+                    y = this.Control.BoundingRectangle.Y + this.Control.BoundingRectangle.Height / 2;
                     return new Point(x, y);
                 case ClickPosition.CenterRight:
-                    x = this._control.BoundingRectangle.X + this._control.BoundingRectangle.Width;
-                    y = this._control.BoundingRectangle.Y + this._control.BoundingRectangle.Height / 2;
+                    x = this.Control.BoundingRectangle.X + this.Control.BoundingRectangle.Width;
+                    y = this.Control.BoundingRectangle.Y + this.Control.BoundingRectangle.Height / 2;
                     return new Point(x, y);
                 case ClickPosition.TopLeft:
-                    x = this._control.BoundingRectangle.X;
-                    y = this._control.BoundingRectangle.Y + this._control.BoundingRectangle.Height;
+                    x = this.Control.BoundingRectangle.X;
+                    y = this.Control.BoundingRectangle.Y + this.Control.BoundingRectangle.Height;
                     return new Point(x, y);
                 case ClickPosition.TopCenter:
-                    x = this._control.BoundingRectangle.X + this._control.BoundingRectangle.Width / 2;
-                    y = this._control.BoundingRectangle.Y + this._control.BoundingRectangle.Height;
+                    x = this.Control.BoundingRectangle.X + this.Control.BoundingRectangle.Width / 2;
+                    y = this.Control.BoundingRectangle.Y + this.Control.BoundingRectangle.Height;
                     return new Point(x, y);
                 case ClickPosition.TopRight:
-                    x = this._control.BoundingRectangle.X + this._control.BoundingRectangle.Width;
-                    y = this._control.BoundingRectangle.Y + this._control.BoundingRectangle.Height;
+                    x = this.Control.BoundingRectangle.X + this.Control.BoundingRectangle.Width;
+                    y = this.Control.BoundingRectangle.Y + this.Control.BoundingRectangle.Height;
                     return new Point(x, y);
                 default:
                     return new Point(0,0);
@@ -267,8 +273,8 @@ namespace Highway.Insurance.UI.Controls
 
         public void Hover()
         {
-            this._control.WaitForControlReady();
-            Mouse.Hover(this._control);
+            this.Control.WaitForControlReady();
+            Mouse.Hover(this.Control);
 
         }
 
@@ -277,8 +283,8 @@ namespace Highway.Insurance.UI.Controls
         /// </summary>
         public void DoubleClick()
         {
-            this._control.WaitForControlReady();
-            Mouse.DoubleClick(this._control);
+            this.Control.WaitForControlReady();
+            Mouse.DoubleClick(this.Control);
         }
 
         /// <summary>
@@ -288,8 +294,8 @@ namespace Highway.Insurance.UI.Controls
         {
             get 
             {
-                this._control.WaitForControlReady();
-                return this._control.Enabled; 
+                this.Control.WaitForControlReady();
+                return this.Control.Enabled; 
             }
         }
 
@@ -300,12 +306,12 @@ namespace Highway.Insurance.UI.Controls
         {
             get 
             {
-                if (this._control == null)
+                if (this.Control == null)
                 {
                     return false;
                 }
 
-                return this._control.Exists; 
+                return this.Control.Exists; 
             }
         }
 
@@ -314,8 +320,8 @@ namespace Highway.Insurance.UI.Controls
         /// </summary>
         public void SetFocus()
         {
-            this._control.WaitForControlReady();
-            this._control.SetFocus();
+            this.Control.WaitForControlReady();
+            this.Control.SetFocus();
         }
 
         /// <summary>
@@ -326,7 +332,7 @@ namespace Highway.Insurance.UI.Controls
         /// <param name="sValue"></param>
         public void SetSearchProperty(string sPropertyName, string sValue)
         {
-            this._control.SearchProperties.Add(sPropertyName, sValue, PropertyExpressionOperator.EqualTo);
+            this.Control.SearchProperties.Add(sPropertyName, sValue, PropertyExpressionOperator.EqualTo);
         }
 
         /// <summary>
@@ -337,7 +343,7 @@ namespace Highway.Insurance.UI.Controls
         /// <param name="sValue"></param>
         public void SetSearchPropertyRegx(string sPropertyName, string sValue)
         {
-            this._control.SearchProperties.Add(sPropertyName, sValue, PropertyExpressionOperator.Contains);
+            this.Control.SearchProperties.Add(sPropertyName, sValue, PropertyExpressionOperator.Contains);
         }
     }
 }
