@@ -11,17 +11,17 @@ namespace Highway.Insurance.UI.Web.Controls
             get;
         }
 
-        string Selector
-        {
-            get; set;
-        }
-
-        WebPage Page
-        {
-            get; set;
-        }
-
         bool IsVisible();
         Dictionary<string, string> Data();
+
+        IEnhancedHtmlControl Parent { get; }
+
+        IEnhancedHtmlControl PreviousSibling { get; }
+
+        IEnhancedHtmlControl NextSibling { get; }
+
+        IEnhancedHtmlControl FirstChild { get; }
+
+        List<IEnhancedHtmlControl> GetChildren();
     }
 }

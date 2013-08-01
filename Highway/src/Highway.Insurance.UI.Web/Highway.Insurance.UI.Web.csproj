@@ -111,6 +111,7 @@
     <Compile Include="Controls\HtmlControls\WebPage.cs" />
     <Compile Include="Controls\TelerikControls\TelerikComboBox.cs" />
     <Compile Include="EnhancedControlBaseFactory.cs" />
+    <Compile Include="IInternalEnhancedHtmlControl.cs" />
     <Compile Include="KeyboardExtensions.cs" />
     <Compile Include="MouseExtensions.cs" />
     <Compile Include="ObjectRepositoryManager.cs" />

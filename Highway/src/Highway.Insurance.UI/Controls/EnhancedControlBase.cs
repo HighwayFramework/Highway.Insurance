@@ -339,34 +339,5 @@ namespace Highway.Insurance.UI.Controls
         {
             this._control.SearchProperties.Add(sPropertyName, sValue, PropertyExpressionOperator.Contains);
         }
-
-        #region implementing parent, sibling etc methods as virtual
-
-        public virtual IEnhancedControlBase Parent { get { return null; } }
-
-        public virtual IEnhancedControlBase PreviousSibling { get { return null; } }
-
-        public virtual IEnhancedControlBase NextSibling { get { return null; } }
-
-        public virtual IEnhancedControlBase FirstChild { get { return null; } }
-
-        public virtual List<IEnhancedControlBase> GetChildren() { return null; }
-
-        #endregion
     }
-
-    public enum ClickPosition
-    {
-        Default,
-        Center,
-        TopRight,
-        TopCenter,
-        TopLeft,
-        BottomLeft,
-        BottomCenter,
-        BottomRight,
-        CenterRight,
-        CenterLeft
-    }
-
 }

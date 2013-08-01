@@ -33,15 +33,6 @@ namespace Highway.Insurance.UI.Controls
 
         void SetSearchPropertyRegx(string sPropertyName, string sValue);
 
-        IEnhancedControlBase Parent { get; }
-
-        IEnhancedControlBase PreviousSibling { get; }
-
-        IEnhancedControlBase NextSibling { get; }
-
-        IEnhancedControlBase FirstChild { get; }
-
-        List<IEnhancedControlBase> GetChildren();
         void Hover();
 
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -16,8 +17,8 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
     public class EnhancedHtmlControl<T> : EnhancedControlBase<T>, IEnhancedHtmlControl
         where T : HtmlControl
     {
-        public WebPage Page { get; set; }
-        public string Selector { get; set; }
+        internal WebPage Page { get; set; }
+        internal string Selector { get; set; }
 
         public EnhancedHtmlControl()
             : base()
@@ -108,7 +109,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         private Dictionary<string, string> ParseDataFromDefintion()
         {
             MatchCollection dataAttributes = dataParameterSearch.Matches(this._control.ControlDefinition);
-            var data = new Dictionary<string, string>();
+            var data = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
             foreach (object dataAttribute in dataAttributes)
             {
                 var stringData = dataAttribute.ToString();
@@ -184,12 +185,12 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         /// <summary>
         /// Gets the parent of the current Highway.Insurance control.
         /// </summary>
-        public override IEnhancedControlBase Parent
+        public IEnhancedHtmlControl Parent
         {
             get
             {
                 this._control.WaitForControlReady();
-                IEnhancedControlBase ret = null;
+                IEnhancedHtmlControl ret = null;
                 try
                 {
                     ret = WrapUtil((HtmlControl)this._control.GetParent());
@@ -205,12 +206,12 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         /// <summary>
         /// Gets the previous sibling of the current Highway.Insurance control.
         /// </summary>
-        public override IEnhancedControlBase PreviousSibling
+        public IEnhancedHtmlControl PreviousSibling
         {
             get
             {
                 this._control.WaitForControlReady();
-                IEnhancedControlBase ret = null;
+                IEnhancedHtmlControl ret = null;
                 try
                 {
                     ret = WrapUtil((HtmlControl)this._control.GetParent().GetChildren()[GetMyIndexAmongSiblings() - 1]);
@@ -226,12 +227,12 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         /// <summary>
         /// Gets the next sibling of the current Highway.Insurance control.
         /// </summary>
-        public override IEnhancedControlBase NextSibling
+        public IEnhancedHtmlControl NextSibling
         {
             get
             {
                 this._control.WaitForControlReady();
-                IEnhancedControlBase ret = null;
+                IEnhancedHtmlControl ret = null;
                 try
                 {
                     UITestControl parent = this._control.GetParent();
@@ -255,12 +256,12 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         /// <summary>
         /// Gets the first child of the current Highway.Insurance control.
         /// </summary>
-        public override IEnhancedControlBase FirstChild
+        public IEnhancedHtmlControl FirstChild
         {
             get
             {
                 this._control.WaitForControlReady();
-                IEnhancedControlBase ret = null;
+                IEnhancedHtmlControl ret = null;
                 try
                 {
                     ret = WrapUtil((HtmlControl)this._control.GetChildren()[0]);
@@ -277,10 +278,10 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         /// Returns a list of all first level children of the current Highway.Insurance control.
         /// </summary>
         /// <returns>list of all first level children</returns>
-        public override List<IEnhancedControlBase> GetChildren()
+        public List<IEnhancedHtmlControl> GetChildren()
         {
             this._control.WaitForControlReady();
-            var uicol = new List<IEnhancedControlBase>();
+            var uicol = new List<IEnhancedHtmlControl>();
             foreach (UITestControl uitestcontrol in this._control.GetChildren())
             {
                 uicol.Add(WrapUtil((HtmlControl)uitestcontrol));
@@ -288,9 +289,9 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             return uicol;
         }
 
-        private static IEnhancedControlBase WrapUtil(HtmlControl control)
+        private static IEnhancedHtmlControl WrapUtil(HtmlControl control)
         {
-            IEnhancedControlBase _con = null;
+            IEnhancedHtmlControl _con = null;
             if (control.GetType() == typeof(HtmlButton))
             {
                 _con = new EnhancedHtmlButton();
