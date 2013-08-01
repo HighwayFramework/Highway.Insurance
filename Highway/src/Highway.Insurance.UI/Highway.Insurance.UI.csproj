@@ -74,6 +74,7 @@
     <Compile Include="Exceptions\HighwayInsuranceInvalidSearchKey.cs" />
     <Compile Include="Exceptions\HighwayInsuranceInvalidSearchParameterFormat.cs" />
     <Compile Include="Exceptions\HighwayInsuranceInvalidTraversal.cs" />
+    <Compile Include="Exceptions\HighwayInsuranceNoControlFound.cs" />
     <Compile Include="Exceptions\HighwayInsuranceWrongPageExpectedException.cs" />
     <Compile Include="Exceptions\ResourceNotFoundException.cs" />
     <Compile Include="Helpers\ExecutionTimeHelper.cs" />

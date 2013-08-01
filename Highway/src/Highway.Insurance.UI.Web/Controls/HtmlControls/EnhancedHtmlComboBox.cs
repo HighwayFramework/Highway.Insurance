@@ -20,8 +20,8 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         /// <param name="sItem">Item as string</param>
         public void SelectItem(string sItem)
         {
-            this._control.WaitForControlReady();
-            this._control.SelectedItem = sItem;
+            this.Control.WaitForControlReady();
+            this.Control.SelectedItem = sItem;
         }
 
         /// <summary>
@@ -30,8 +30,8 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         /// <param name="index">index of item</param>
         public void SelectItem(int index)
         {
-            this._control.WaitForControlReady();
-            this._control.SelectedIndex = index;
+            this.Control.WaitForControlReady();
+            this.Control.SelectedIndex = index;
         }
 
         /// <summary>
@@ -41,8 +41,8 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         {
             get 
             {
-                this._control.WaitForControlReady();
-                return this._control.SelectedItem; 
+                this.Control.WaitForControlReady();
+                return this.Control.SelectedItem; 
             }
         }
 
@@ -53,8 +53,8 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         {
             get
             {
-                this._control.WaitForControlReady();
-                return this._control.SelectedIndex;
+                this.Control.WaitForControlReady();
+                return this.Control.SelectedIndex;
             }
         }
 
@@ -65,8 +65,8 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         {
             get
             {
-                this._control.WaitForControlReady();
-                return this._control.ItemCount;
+                this.Control.WaitForControlReady();
+                return this.Control.ItemCount;
             }
         }
 

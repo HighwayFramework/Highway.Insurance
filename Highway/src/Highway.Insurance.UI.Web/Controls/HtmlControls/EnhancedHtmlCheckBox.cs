@@ -13,31 +13,31 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
 
         public void Check()
         {
-            this._control.WaitForControlReady();
-            if (!this._control.Checked)
+            this.Control.WaitForControlReady();
+            if (!this.Control.Checked)
             {
-                this._control.Checked = true;
+                this.Control.Checked = true;
             }
         }
 
         public void Check2()
         {
-            this._control.WaitForControlReady();
-            string sOnClick = (string)this._control.GetProperty("onclick");
-            string sId = this._control.Id;
+            this.Control.WaitForControlReady();
+            string sOnClick = (string)this.Control.GetProperty("onclick");
+            string sId = this.Control.Id;
             if (sId == null || sId == "")
             {
                 throw new HighwayInsuranceGenericException("Check2(): No ID found for the checkbox!");
             }
-            ((BrowserWindow)_control.TopParent).ExecuteScript("document.getElementById('" + sId + "').checked=true;" + sOnClick);
+            ((BrowserWindow)Control.TopParent).ExecuteScript("document.getElementById('" + sId + "').checked=true;" + sOnClick);
         }
 
         public void UnCheck()
         {
-            this._control.WaitForControlReady();
-            if (this._control.Checked)
+            this.Control.WaitForControlReady();
+            if (this.Control.Checked)
             {
-                this._control.Checked = false;
+                this.Control.Checked = false;
             }
         }
 
@@ -45,8 +45,8 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         {
             get 
             {
-                this._control.WaitForControlReady();
-                return this._control.Checked; 
+                this.Control.WaitForControlReady();
+                return this.Control.Checked; 
             }
         }
     }

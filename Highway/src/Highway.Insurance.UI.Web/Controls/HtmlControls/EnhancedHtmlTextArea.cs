@@ -9,16 +9,16 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         public EnhancedHtmlTextArea(WebPage page, string selector) : base(page, selector) { }
         public void SetText(string sText)
         {
-            this._control.WaitForControlReady();
-            this._control.Text = sText;
+            this.Control.WaitForControlReady();
+            this.Control.Text = sText;
         }
 
         public string Text
         {
             get 
             {
-                this._control.WaitForControlReady();
-                return this._control.Text; 
+                this.Control.WaitForControlReady();
+                return this.Control.Text; 
             }
         }
 
@@ -26,8 +26,8 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         {
             get
             {
-                this._control.WaitForControlReady();
-                return this._control.ReadOnly;
+                this.Control.WaitForControlReady();
+                return this.Control.ReadOnly;
             }
         }
     }

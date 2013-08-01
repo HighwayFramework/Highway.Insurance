@@ -23,16 +23,16 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         {
             get
             {
-                this._control.WaitForControlReady();
-                return this._control.ColumnCount;
+                this.Control.WaitForControlReady();
+                return this.Control.ColumnCount;
             }
         }
 
         public int RowCount
         {
             get {
-                this._control.WaitForControlReady();
-                return this._control.Rows.Count; 
+                this.Control.WaitForControlReady();
+                return this.Control.Rows.Count; 
             }
         }
 
@@ -77,11 +77,11 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
 
         public int FindRow(int iCol, string sValueToSearch, EnhancedHtmlTableSearchOptions option)
         {
-            this._control.WaitForControlReady();
+            this.Control.WaitForControlReady();
             int iRow = -1;
             int rowCount = -1;
 
-            foreach (HtmlControl control in this._control.Rows)
+            foreach (HtmlControl control in this.Control.Rows)
             {
                  //control could be of ControlType.RowHeader or ControlType.Row
 
@@ -156,7 +156,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             mshtml.IHTMLElement check = GetEmbeddedCheckBoxNativeElement(td);
             string sOuterHTML = check.outerHTML.Replace("<", "").Replace(">", "").Trim();
             string[] saTemp = sOuterHTML.Split(' ');
-            HtmlCheckBox chk = new HtmlCheckBox(this._control.Container);
+            HtmlCheckBox chk = new HtmlCheckBox(this.Control.Container);
             foreach (string sTemp in saTemp)
             {
                 if (sTemp.IndexOf('=') > 0)
@@ -197,7 +197,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         public string[] GetColumnHeaders()
         {
             string[] retArray;
-            UITestControlCollection rows = this._control.Rows;
+            UITestControlCollection rows = this.Control.Rows;
             if ((rows != null) && (rows.Count > 0))
             {
                 if ((rows[0] != null) && (rows[0].ControlType == ControlType.RowHeader))
@@ -226,11 +226,11 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
 
         private T GetCell<T>(int iRow, int iCol) where T : IEnhancedHtmlControl
         {
-            this._control.WaitForControlReady();
+            this.Control.WaitForControlReady();
             HtmlControl htmlCell = null;
             int rowCount = -1;
 
-            foreach (HtmlControl control in this._control.Rows)
+            foreach (HtmlControl control in this.Control.Rows)
             {
                 //control could be of ControlType.RowHeader or ControlType.Row
 

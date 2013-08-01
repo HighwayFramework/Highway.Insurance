@@ -11,7 +11,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
 
         public void SetFile(string sFilePath)
         {
-            this._control.FileName = sFilePath;
+            this.Control.FileName = sFilePath;
         }
     }
 }

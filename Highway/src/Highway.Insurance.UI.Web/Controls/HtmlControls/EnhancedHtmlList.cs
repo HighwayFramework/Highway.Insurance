@@ -41,13 +41,13 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         {
             get
             {
-                this._control.WaitForControlReady();
-                return _control.SelectedItems;
+                this.Control.WaitForControlReady();
+                return Control.SelectedItems;
             }
             set
             {
-                this._control.WaitForControlReady();
-                _control.SelectedItems = value;
+                this.Control.WaitForControlReady();
+                Control.SelectedItems = value;
             }
         }
     }

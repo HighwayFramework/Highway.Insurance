@@ -10,7 +10,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
             this.WindowTitles.Add(this.sWindowTitle);
         }
 
-        //public new void ((BrowserWindow)_control.TopParent).ExecuteScript(string sCode)
+        //public new void ((BrowserWindow)Control.TopParent).ExecuteScript(string sCode)
         //{
         //    HtmlDocument document = new HtmlDocument(this);
         //    mshtml.IHTMLBodyElement idoc = (mshtml.IHTMLBodyElement)document.NativeElement;

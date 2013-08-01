@@ -24,6 +24,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3916E5
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuspecs", "Nuspecs", "{6477B21D-9AF2-4387-9B03-9F991F0A0E38}"
+	ProjectSection(SolutionItems) = preProject
+		src\Highway.Insurance.UI.Web\Highway.Insurance.UI.Web.nuspec = src\Highway.Insurance.UI.Web\Highway.Insurance.UI.Web.nuspec
+		src\Highway.Insurance.UI.Windows\Highway.Insurance.UI.Windows.nuspec = src\Highway.Insurance.UI.Windows\Highway.Insurance.UI.Windows.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

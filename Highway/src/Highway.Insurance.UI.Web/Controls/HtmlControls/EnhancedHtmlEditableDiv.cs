@@ -11,22 +11,22 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
 
         public void SetText(string sText)
         {
-            this._control.WaitForControlReady();
-            this._control.Text = sText;
+            this.Control.WaitForControlReady();
+            this.Control.Text = sText;
         }
 
         public string GetText()
         {
-            this._control.WaitForControlReady();
-            return this._control.Text; 
+            this.Control.WaitForControlReady();
+            return this.Control.Text; 
         }
 
         public bool ReadOnly
         {
             get
             {
-                this._control.WaitForControlReady();
-                return this._control.ReadOnly;
+                this.Control.WaitForControlReady();
+                return this.Control.ReadOnly;
             }
         }
     }

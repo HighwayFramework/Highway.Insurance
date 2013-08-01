@@ -13,7 +13,7 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         {
             get
             {
-                return this._control.DisplayText;
+                return this.Control.DisplayText;
             }
         }
     }

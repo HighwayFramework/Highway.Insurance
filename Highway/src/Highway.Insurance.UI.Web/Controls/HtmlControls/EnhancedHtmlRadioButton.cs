@@ -12,27 +12,27 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
 
         public void Select()
         {
-            this._control.WaitForControlReady();
-            this._control.Selected = true;
+            this.Control.WaitForControlReady();
+            this.Control.Selected = true;
         }
 
         public void Select2()
         {
-            this._control.WaitForControlReady();
-            string sOnClick = (string)this._control.GetProperty("onclick");
-            string sId = this._control.Id;
+            this.Control.WaitForControlReady();
+            string sOnClick = (string)this.Control.GetProperty("onclick");
+            string sId = this.Control.Id;
             if (sId == null || sId == "")
             {
                 throw new HighwayInsuranceGenericException("Select2(): No ID found for the RadioButton!");
             }
-            ((BrowserWindow)_control.TopParent).ExecuteScript("document.getElementById('" + sId + "').checked=true;" + sOnClick);
+            ((BrowserWindow)Control.TopParent).ExecuteScript("document.getElementById('" + sId + "').checked=true;" + sOnClick);
         }
 
         public bool IsSelected
         {
             get {
-                this._control.WaitForControlReady();
-                return this._control.Selected; 
+                this.Control.WaitForControlReady();
+                return this.Control.Selected; 
             }
         }
     }

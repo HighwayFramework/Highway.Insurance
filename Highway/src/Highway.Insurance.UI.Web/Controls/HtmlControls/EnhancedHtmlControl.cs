@@ -458,7 +458,14 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
 
         private void JqueryControlPrep()
         {
-            if (controlFunc != null) Control = controlFunc();
+            if (controlFunc != null)
+            {
+                Control = controlFunc();
+            }
+            if (Control == null)
+            {
+                throw new HighwayInsuranceNoControlFound(string.Format("No control for JQuery Selector : {0}", Selector));
+            }
         }
 
 

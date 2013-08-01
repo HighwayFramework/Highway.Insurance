@@ -19,8 +19,8 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         {
             get
             {
-                this._control.WaitForControlReady();
-                return this._control.LabelFor;
+                this.Control.WaitForControlReady();
+                return this.Control.LabelFor;
             }
         }
     }

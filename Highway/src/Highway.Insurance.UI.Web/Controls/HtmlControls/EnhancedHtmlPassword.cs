@@ -10,8 +10,8 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         public override void Wrap(object control, bool setSearchProperties = true)
         {
             base.Wrap(control, setSearchProperties);
-            this._control = control as HtmlEdit;
-            this._control.FilterProperties[HtmlEdit.PropertyNames.Type] = "PASSWORD";
+            this.Control = control as HtmlEdit;
+            this.Control.FilterProperties[HtmlEdit.PropertyNames.Type] = "PASSWORD";
         }
     }
 }
