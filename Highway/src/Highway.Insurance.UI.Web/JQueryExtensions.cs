@@ -24,8 +24,8 @@ namespace Highway.Insurance.UI.Web
             if (list != null)
             {
                 if (list.OfType<T>().FirstOrDefault() == null)
-                    throw new InvalidCastException(string.Format("Type of {0} not expected Type of {1}",
-                        obj.GetType().Name, typeof (T).Name));
+                    throw new InvalidCastException(string.Format("Type of {0} - {1}  not expected Type of {2}",
+                        obj.GetType().Name, ExtractTypeFromList(list).Name, typeof (T).Name));
                 return list.OfType<T>().First();
             }
             else
@@ -37,6 +37,16 @@ namespace Highway.Insurance.UI.Web
             }
         }
 
+        private static Type ExtractTypeFromList(object obj)
+        {
+            var type = obj.GetType();
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof (List<>))
+            {
+                Type itemType = type.GetGenericArguments()[0];
+                return itemType;
+            }
+            else return type;
+        }
         public static object FindControlBySelector(this BrowserWindow window,Type htmlType, string selector)
         {
             var obj = window.ExecuteScript(string.Format("return $('{0}')", selector));
