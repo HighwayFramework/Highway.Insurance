@@ -460,11 +460,13 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         {
             if (controlFunc != null)
             {
-                Control = controlFunc();
-            }
-            if (Control == null)
-            {
-                throw new HighwayInsuranceNoControlFound(string.Format("No control for JQuery Selector : {0}", Selector));
+                T con = null;
+                con = controlFunc();
+                if (con == null)
+                {
+                    throw new HighwayInsuranceNoControlFound(string.Format("No control for JQuery Selector : {0}", Selector));
+                }
+                _control = con;
             }
         }
 
