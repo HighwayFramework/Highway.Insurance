@@ -1,5 +1,6 @@
 ﻿using Example.UI.Web.Tests.ObjectRepository;
 using Highway.Insurance.UI.Web.Controls.HtmlControls;
+using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Example.UI.Web.Tests
@@ -11,7 +12,7 @@ namespace Example.UI.Web.Tests
         public void ShouldInjectJqueryToPage()
         {
             //Arrange
-            var noJquery = WebPage.Launch<NoJquery>("https://rawgithub.com/HighwayFramework/Highway.Insurance/master/Highway/test/Example.UI.Web.Tests/TestHtml/NoJqueryExamples.html");
+            var noJquery = WebPage.Launch<NoJquery>("http://rawgithub.com/HighwayFramework/Highway.Insurance/master/Highway/test/Example.UI.Web.Tests/TestHtml/NoJqueryExamples.html");
 
             //Act
             Assert.IsTrue(noJquery.FirstListItem.CurrentlyExists());

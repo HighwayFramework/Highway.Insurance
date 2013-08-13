@@ -96,6 +96,7 @@
     <Compile Include="ObjectRepository\HtmlTestPage.Div1.cs" />
     <Compile Include="ObjectRepository\HtmlTestPage.cs" />
     <Compile Include="ObjectRepository\DynamicBrowserWindowTitleRepository.cs" />
+    <Compile Include="ObjectRepository\NoJquery.cs" />
     <Compile Include="ObjectRepository\TestHtmlPage.cs" />
     <Compile Include="ObjectRepository\GoogleHomePageWithInvalidControlSearchProperties.cs" />
     <Compile Include="ObjectRepository\GoogleSearch.cs" />
