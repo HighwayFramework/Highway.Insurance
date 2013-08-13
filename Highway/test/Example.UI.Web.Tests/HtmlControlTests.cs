@@ -562,10 +562,17 @@ namespace Example.UI.Web.Tests
         [TestMethod]
         public void HtmlParagraph_InObjectRepository_Succeeds()
         {
-            TestHtmlPage testpage = WebPage.Launch<TestHtmlPage>(CurrentDirectory + "/TestHtmlPage.html");
+            TestHtmlPage testpage = WebPage.Launch<TestHtmlPage>(CurrentDirectory + "\\TestHtmlPage.html");
             string content = testpage.p.InnerText;
             Assert.IsTrue(content.Contains("EnhancedHtmlParagraph"));
             testpage.Close();
+        }
+
+        [TestMethod]
+        public void CanClickLinkOnMyBlog()
+        {
+            DevlinLilesBlog blog = WebPage.Launch<DevlinLilesBlog>("http://www.devlinliles.com");
+            blog.SecondBlogTitle.Click();
         }
 
         [TestMethod]
