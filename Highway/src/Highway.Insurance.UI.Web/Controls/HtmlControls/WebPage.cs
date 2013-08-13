@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Highway.Insurance.UI.Controls;
 using Highway.Insurance.UI.Web.Browsers;
+using Highway.Insurance.UI.Web.Properties;
 using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 
@@ -30,11 +31,20 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
         /// Initializes a new instance of the <see cref="WebPage"/> class.
         /// </summary>
         /// <param name="title">The title.</param>
-        public WebPage(string title)
+        public WebPage(string title, bool injectJquery = true)
         {
             this.SearchProperties[UITestControl.PropertyNames.ClassName] = GetCurrentBrowser().WindowClassName;
 
             SetWindowTitle(title);
+            if (injectJquery)
+            {
+                PrepareWindowForJquery();
+            }
+        }
+
+        private void PrepareWindowForJquery()
+        {
+            base.ExecuteScript(Resources.JqueryInjection);
         }
 
         /// <summary>
@@ -253,49 +263,21 @@ namespace Highway.Insurance.UI.Web.Controls.HtmlControls
 
         #endregion
 
-        internal bool IsVisible(string selector)
+        private Type GetGenericType(object obj)
         {
-            return (bool) base.ExecuteScript(string.Format("return $('{0}').is(':visible')", selector));
+            if (obj != null)
+            {
+                Type t = obj.GetType();
+                if (t.IsGenericType)
+                {
+                    Type[] at = t.GetGenericArguments();
+                    t = at.First<Type>();
+                } return t;
+            }
+            else
+            {
+                return null;
+            }
         }
-
-        internal HtmlControl GetParent(string selector)
-        {
-            return (HtmlControl) base.ExecuteScript(string.Format("return $('{0}').parent()", selector));
-        }
-
-        internal HtmlControl GetFirstChild(string selector)
-        {
-            object obj = base.ExecuteScript(string.Format("return $('{0}').children()", selector));
-            var list = obj as List<object>;
-            return (HtmlControl) (list != null ? list.First() : null);
-        }
-
-        internal HtmlControl GetNextSibling(string selector)
-        {
-            return (HtmlControl) base.ExecuteScript(string.Format("return $('{0}').next()", selector));
-        }
-
-        internal HtmlControl GetPreviousSibling(string selector)
-        {
-            return (HtmlControl) base.ExecuteScript(string.Format("return $('{0}').prev()", selector));
-        }
-        
-        internal IEnumerable<HtmlControl> GetChildControls(string selector)
-        {
-            object obj = base.ExecuteScript(string.Format("return $('{0}').children()", selector));
-            var list = obj as List<object>;
-            return (list != null ? list.OfType<HtmlControl>() : null);
-        }
-
-
-        public bool CurrentlyExists<T>(EnhancedHtmlControl<T> control) where T : HtmlControl
-        {
-            object obj = base.ExecuteScript(string.Format("return $('{0}')", control.Selector));
-            var list = obj as List<object>;
-            if (list != null) return list.Any();
-            return obj != null;
-        }
-
-
     }
 }

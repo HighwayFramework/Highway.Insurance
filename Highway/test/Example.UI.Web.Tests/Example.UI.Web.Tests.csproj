@@ -89,6 +89,7 @@
   <ItemGroup>
     <Compile Include="BrowserWindowTests.cs" />
     <Compile Include="DataManagerTests.cs" />
+    <Compile Include="JquerySelectorTests.cs" />
     <Compile Include="ObjectRepository\DevlinLilesBlog.cs" />
     <Compile Include="ObjectRepository\HtmlTestPageFeeds.cs" />
     <Compile Include="ObjectRepository\HtmlTestPage.Div2.cs" />
@@ -105,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestHtml\Lists.html" />
+    <Content Include="TestHtml\NoJqueryExamples.html" />
     <Content Include="TestXml\XMLFile1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
