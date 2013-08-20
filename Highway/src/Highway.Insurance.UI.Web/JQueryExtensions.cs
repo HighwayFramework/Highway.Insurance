@@ -13,13 +13,13 @@ namespace Highway.Insurance.UI.Web
     {
         public static IEnumerable<T> FindControlsBySelector<T>(this BrowserWindow window, string selector) where T : HtmlControl
         {
-            var controlsBySelector = (IEnumerable<T>)window.ExecuteScript(string.Format("return $('{0}')", selector));
+            var controlsBySelector = (IEnumerable<T>)window.ExecuteScript(string.Format("return jQuery('{0}')", selector));
             return controlsBySelector;
         }
 
         public static T FindControlBySelector<T>(this BrowserWindow window, string selector) where T : HtmlControl
         {
-            object obj = window.ExecuteScript(string.Format("return $('{0}')", selector));
+            object obj = window.ExecuteScript(string.Format("return jQuery('{0}')", selector));
             return ExtractTypeFromReturn<T>(obj);
         }
 
@@ -52,14 +52,14 @@ namespace Highway.Insurance.UI.Web
 
         public static object FindControlBySelector(this BrowserWindow window, Type htmlType, string selector)
         {
-            var obj = window.ExecuteScript(string.Format("return $('{0}')", selector));
+            var obj = window.ExecuteScript(string.Format("return jQuery('{0}')", selector));
             var list = obj as List<object>;
             return (list != null ? Convert.ChangeType(list.First(), htmlType) : Convert.ChangeType(obj, htmlType));
         }
 
         public static IEnumerable<object> FindControlsBySelector(this BrowserWindow window, Type htmlType, string selector)
         {
-            var controls = (IEnumerable)window.ExecuteScript(string.Format("return $('{0}')", selector));
+            var controls = (IEnumerable)window.ExecuteScript(string.Format("return jQuery('{0}')", selector));
             return controls.Cast<object>().Select(control => Convert.ChangeType(control, htmlType));
         }
 
