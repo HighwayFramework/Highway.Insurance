@@ -122,6 +122,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SelectorInvalidException.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Highway.Insurance.UI\Highway.Insurance.UI.csproj">

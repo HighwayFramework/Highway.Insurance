@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Highway.Insurance.UI.Exceptions;
 using Highway.Insurance.UI.Web.Controls;
 using Highway.Insurance.UI.Web.Controls.HtmlControls;
 using Microsoft.VisualStudio.TestTools.UITesting;
@@ -20,6 +21,10 @@ namespace Highway.Insurance.UI.Web
         public static T FindControlBySelector<T>(this BrowserWindow window, string selector) where T : HtmlControl
         {
             object obj = window.ExecuteScript(string.Format("return jQuery('{0}')", selector));
+            if (obj == null)
+            {
+                throw new SelectorInvalidException(selector);
+            }
             return ExtractTypeFromReturn<T>(obj);
         }
 
