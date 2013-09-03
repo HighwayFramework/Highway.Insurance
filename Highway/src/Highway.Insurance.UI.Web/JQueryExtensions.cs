@@ -14,17 +14,24 @@ namespace Highway.Insurance.UI.Web
     {
         public static IEnumerable<T> FindControlsBySelector<T>(this BrowserWindow window, string selector) where T : HtmlControl
         {
-            var controlsBySelector = (IEnumerable<T>)window.ExecuteScript(string.Format("return jQuery('{0}')", selector));
+            var controlsBySelector = (IEnumerable<T>)window.ExecuteScript(string.Format("return jQuery('{0}');", selector));
             return controlsBySelector;
         }
 
         public static T FindControlBySelector<T>(this BrowserWindow window, string selector) where T : HtmlControl
         {
-            object obj = window.ExecuteScript(string.Format("return jQuery('{0}')", selector));
+            object obj = window.ExecuteScript(string.Format("return jQuery('{0}');", selector));
             if (obj == null)
             {
                 throw new SelectorInvalidException(selector);
             }
+            var list = obj as List<object>;
+
+            if (list != null && !list.Any())
+            {
+                throw new SelectorInvalidException(selector);
+            }
+
             return ExtractTypeFromReturn<T>(obj);
         }
 
@@ -57,14 +64,14 @@ namespace Highway.Insurance.UI.Web
 
         public static object FindControlBySelector(this BrowserWindow window, Type htmlType, string selector)
         {
-            var obj = window.ExecuteScript(string.Format("return jQuery('{0}')", selector));
+            var obj = window.ExecuteScript(string.Format("return jQuery('{0}');", selector));
             var list = obj as List<object>;
             return (list != null ? Convert.ChangeType(list.First(), htmlType) : Convert.ChangeType(obj, htmlType));
         }
 
         public static IEnumerable<object> FindControlsBySelector(this BrowserWindow window, Type htmlType, string selector)
         {
-            var controls = (IEnumerable)window.ExecuteScript(string.Format("return jQuery('{0}')", selector));
+            var controls = (IEnumerable)window.ExecuteScript(string.Format("return jQuery('{0}');", selector));
             return controls.Cast<object>().Select(control => Convert.ChangeType(control, htmlType));
         }
 
@@ -76,41 +83,41 @@ namespace Highway.Insurance.UI.Web
 
         public static bool IsVisible(this BrowserWindow window, string selector)
         {
-            return (bool)window.ExecuteScript(string.Format("return jQuery('{0}').is(':visible')", selector));
+            return (bool)window.ExecuteScript(string.Format("return jQuery('{0}').is(':visible');", selector));
         }
 
         public static HtmlControl GetParent(this BrowserWindow window, string selector)
         {
-            return (HtmlControl)window.ExecuteScript(string.Format("return jQuery('{0}').parent()", selector));
+            return (HtmlControl)window.ExecuteScript(string.Format("return jQuery('{0}').parent();", selector));
         }
 
         public static HtmlControl GetFirstChild(this BrowserWindow window, string selector)
         {
-            object obj = window.ExecuteScript(string.Format("return jQuery('{0}').children()", selector));
+            object obj = window.ExecuteScript(string.Format("return jQuery('{0}').children();", selector));
             var list = obj as List<object>;
             return (HtmlControl)(list != null ? list.First() : null);
         }
 
         public static HtmlControl GetNextSibling(this BrowserWindow window, string selector)
         {
-            return (HtmlControl)window.ExecuteScript(string.Format("return jQuery('{0}').next()", selector));
+            return (HtmlControl)window.ExecuteScript(string.Format("return jQuery('{0}').next();", selector));
         }
 
         public static HtmlControl GetPreviousSibling(this BrowserWindow window, string selector)
         {
-            return (HtmlControl)window.ExecuteScript(string.Format("return jQuery('{0}').prev()", selector));
+            return (HtmlControl)window.ExecuteScript(string.Format("return jQuery('{0}').prev();", selector));
         }
 
         public static IEnumerable<HtmlControl> GetChildControls(this BrowserWindow window, string selector)
         {
-            object obj = window.ExecuteScript(string.Format("return jQuery('{0}').children()", selector));
+            object obj = window.ExecuteScript(string.Format("return jQuery('{0}').children();", selector));
             var list = obj as List<object>;
             return (list != null ? list.OfType<HtmlControl>() : null);
         }
 
         public static bool CurrentlyExists<T>(this BrowserWindow window, EnhancedHtmlControl<T> control) where T : HtmlControl
         {
-            object obj = window.ExecuteScript(string.Format("return jQuery('{0}')", control.Selector));
+            object obj = window.ExecuteScript(string.Format("return jQuery('{0}');", control.Selector));
             var list = obj as List<object>;
             if (list != null)
             {
