@@ -1,21 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20930.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{DAB63CF2-E576-43B9-8D1E-EED8348F9DB2}"
 	ProjectSection(SolutionItems) = preProject
 		Microsoft.VisualStudio.TestTools.UITest.Extension.CrossBrowser.dll = Microsoft.VisualStudio.TestTools.UITest.Extension.CrossBrowser.dll
 		Microsoft.VisualStudio.TestTools.UITest.Extension.Silverlight.dll = Microsoft.VisualStudio.TestTools.UITest.Extension.Silverlight.dll
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Insurance.UI", "src\Highway.Insurance.UI\Highway.Insurance.UI.csproj", "{FD412E76-A011-46FA-BF88-38A5EAB112B4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Insurance.UI.Web", "src\Highway.Insurance.UI.Web\Highway.Insurance.UI.Web.csproj", "{4C7A235B-98F3-4308-AB15-54120EF5E9DA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Insurance.UI.Windows", "src\Highway.Insurance.UI.Windows\Highway.Insurance.UI.Windows.csproj", "{97C51ACC-0C89-44FB-AA3B-A1FBAAD9B9CA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.UI.Web", "test\Example.UI.Web\Example.UI.Web.csproj", "{8D375FEE-A322-4FAB-BBD4-FE369F861F03}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.UI.Web.Tests", "test\Example.UI.Web.Tests\Example.UI.Web.Tests.csproj", "{245897D4-96EC-430F-BF1A-9CA44FD06ECB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3916E503-4FA9-4DC9-B557-ABCBDE4FC5CE}"
 	ProjectSection(SolutionItems) = preProject
@@ -29,6 +21,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuspecs", "Nuspecs", "{6477
 		src\Highway.Insurance.UI.Web\Highway.Insurance.UI.Web.nuspec = src\Highway.Insurance.UI.Web\Highway.Insurance.UI.Web.nuspec
 		src\Highway.Insurance.UI.Windows\Highway.Insurance.UI.Windows.nuspec = src\Highway.Insurance.UI.Windows\Highway.Insurance.UI.Windows.nuspec
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Insurance.UI", "src\Highway.Insurance.UI\Highway.Insurance.UI.csproj", "{FD412E76-A011-46FA-BF88-38A5EAB112B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Insurance.UI.Web", "src\Highway.Insurance.UI.Web\Highway.Insurance.UI.Web.csproj", "{4C7A235B-98F3-4308-AB15-54120EF5E9DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Insurance.UI.Windows", "src\Highway.Insurance.UI.Windows\Highway.Insurance.UI.Windows.csproj", "{97C51ACC-0C89-44FB-AA3B-A1FBAAD9B9CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.UI.Web", "test\Example.UI.Web\Example.UI.Web.csproj", "{8D375FEE-A322-4FAB-BBD4-FE369F861F03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.UI.Web.Tests", "test\Example.UI.Web.Tests\Example.UI.Web.Tests.csproj", "{245897D4-96EC-430F-BF1A-9CA44FD06ECB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
